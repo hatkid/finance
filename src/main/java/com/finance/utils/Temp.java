@@ -7,7 +7,7 @@ public class Temp {
 	
 	public static Map<String, String> map = null;
 	static{
-		map = new HashMap<>();
+		map = new HashMap<>();  
 	}
 
 }
