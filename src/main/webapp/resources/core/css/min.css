@@ -1,0 +1,237 @@
+﻿
+/*登录页面body*/
+.loginbody {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+/*登录页面table*/
+.logintable {
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    border: 0px;
+}
+
+/*头部*/
+.loginhead {
+    height: 60px;
+}
+
+.headwelcometitle {
+    font-size: 14px;
+}
+
+.headwelcomeimg {
+    float: left;
+    margin-left: 10px;
+}
+
+.headwelcometext {
+    float: left;
+    margin-left: 10px;
+}
+
+.headtoolestitle {
+    font-size: 14px;
+}
+
+    .headtoolestitle span {
+        margin-right: 10px;
+    }
+
+    .headtoolestitle a {
+        color: #000000;
+        text-decoration: none;
+    }
+
+/*中间*/
+.loginmiddle {
+    background-color: #5DA4E4;
+}
+
+/*中间-左边图标*/
+.loginmidleft {
+    width: 60%;
+}
+
+.divviewbox {
+    width: 380px;
+    height: 380px;
+    border: 1px solid #5DA4E4;
+    background-image: url("../../public/css/images/finance.jpg");
+    background-size: 100% 100%;
+}
+
+/*中间-右边输入框*/
+.loginmidright {
+    width: 40%;
+}
+
+.divinputbox {
+    width: 280px;
+    height: 300px;
+    border: 1px solid #FFFFFF;
+    background-color: #FFFFFF;
+}
+
+.divinputboxtitle {
+    width: 90%;
+    height: 30px;
+    color: #5DA4E4;
+    margin: 0px auto;
+    margin-top: 10px;
+    border-bottom: 1px solid #E6E6E6;
+    font-family: "微软雅黑";
+}
+
+.divinputboxinput {
+    width: 90%;
+    height: 200px;
+    color: #5DA4E4;
+    margin: 0px auto;
+    margin-top: 10px;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.inputusername {
+    width: 100%;
+    height: 30px;
+    margin-top: 6px;
+    padding-left: 30px;
+    border: 1px solid #E6E6E6;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-repeat: no-repeat;
+    background-position-x: 10px;
+    background-position-y: center;
+    background-image: url("../../public/css/images/usernamebg.png");
+}
+
+.inputpassword {
+    width: 100%;
+    height: 30px;
+    margin-top: 16px;
+    padding-left: 30px;
+    border: 1px solid #E6E6E6;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-repeat: no-repeat;
+    background-position-x: 10px;
+    background-position-y: center;
+    background-image: url("../../public/css/images/passwordbg.png");
+}
+
+.inputvalidatecode {
+    float: left;
+    width: 140px;
+    height: 30px;
+    margin-top: 16px;
+    padding-left: 30px;
+    border: 1px solid #E6E6E6;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-repeat: no-repeat;
+    background-position-x: 7px;
+    background-position-y: center;
+    background-image: url("../../public/css/images/validatecodebg.png");
+}
+
+.imgvalidatecode {
+    float: right;
+    width: 111px;
+    height: 30px;
+    margin-top: 16px;
+    border: 0px;
+}
+
+.inputloginbutton {
+    width: 100%;
+    height: 40px;
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-top: 16px;
+    border: 1px solid #E6E6E6;
+    background-color: #0175E2;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-family: "微软雅黑";
+}
+
+.divinputboxbottom {
+    width: 90%;
+    font-size: 14px;
+    color: #000000;
+    margin: 0px auto;
+    margin-top: 16px;
+    font-family: "微软雅黑";
+}
+
+/*底部版权信息*/
+.loginbottom {
+    height: 50px;
+    font-family: "微软雅黑";
+}
+
+.loginbottomcopyrignt {
+    font-size: 14px;
+}
+
+    .loginbottomcopyrignt span {
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+
+
+
+/*************************************************************/
+.wuliubody {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.wuliuheadstyle {
+    width: 100%;
+    height: 60px;
+    min-width:800px;
+    background-color: #DCF5F8;
+    background-image: url("../../public/css/images/wuliutitlebg.png");
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+.wuliuheadtitle {
+    float: left;
+    font-size: 26px;
+    margin-left: 310px;
+    padding-top: 20px;
+    font-family: "微软雅黑";
+}
+.wuliuheadtouxiang
+{
+    float: right;
+    margin-top:4px;
+}
+.wuliuheadtoolsright {
+    float: right;
+    padding-top: 20px;
+    margin-right: 10px;
+}
+.wuliuheadtoolsright span
+{
+    font-size:15px;
+    margin-left:10px;
+    font-family: "微软雅黑";
+}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finance.dao.TransportLogisticsMapper">
+	<select id="findById" parameterType="int" resultType="TransportLogistics">
+		SELECT *
+		FROM transport_logistics WHERE id=#{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="TransportLogistics" flushCache="true"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		transport_logistics(companyName,registrationNumber,address,tel,email,logisticsEmpSum,logisticianEmpNum,isGradeA,vehiclesNumber,ownVehiclesNumber,inkedVehiclesNumber,averageCapacity,capacity,transportLinks,serviceObject,totalValueOfOutput,totalVariableCost,totaFixedCost,year,lng,lat)
+		VALUES(#{companyName,jdbcType=VARCHAR},#{registrationNumber,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{tel,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{logisticsEmpSum,jdbcType=SMALLINT},#{logisticianEmpNum,jdbcType=SMALLINT},#{isGradeA,jdbcType=TINYINT},#{vehiclesNumber,jdbcType=SMALLINT},#{ownVehiclesNumber,jdbcType=SMALLINT},#{inkedVehiclesNumber,jdbcType=SMALLINT},#{averageCapacity,jdbcType=FLOAT},#{capacity,jdbcType=FLOAT},#{transportLinks,jdbcType=VARCHAR},#{serviceObject,jdbcType=VARCHAR},#{totalValueOfOutput,jdbcType=FLOAT},#{totalVariableCost,jdbcType=FLOAT},#{totaFixedCost,jdbcType=FLOAT},#{year,jdbcType=VARCHAR},#{lng},#{lat})
+	</insert>
+	<update id="update" parameterType="TransportLogistics">
+		UPDATE transport_logistics SET
+		lng=#{lng},lat=#{lat},companyName=#{companyName,jdbcType=VARCHAR},registrationNumber=#{registrationNumber,jdbcType=VARCHAR},address=#{address,jdbcType=VARCHAR},tel=#{tel,jdbcType=VARCHAR},email=#{email,jdbcType=VARCHAR},logisticsEmpSum=#{logisticsEmpSum,jdbcType=SMALLINT},logisticianEmpNum=#{logisticianEmpNum,jdbcType=SMALLINT},isGradeA=#{isGradeA,jdbcType=TINYINT},vehiclesNumber=#{vehiclesNumber,jdbcType=SMALLINT},ownVehiclesNumber=#{ownVehiclesNumber,jdbcType=SMALLINT},inkedVehiclesNumber=#{inkedVehiclesNumber,jdbcType=SMALLINT},averageCapacity=#{averageCapacity,jdbcType=FLOAT},capacity=#{capacity,jdbcType=FLOAT},transportLinks=#{transportLinks,jdbcType=VARCHAR},serviceObject=#{serviceObject,jdbcType=VARCHAR},totalValueOfOutput=#{totalValueOfOutput,jdbcType=FLOAT},totalVariableCost=#{totalVariableCost,jdbcType=FLOAT},totaFixedCost=#{totaFixedCost,jdbcType=FLOAT},year=#{year,jdbcType=VARCHAR}
+		WHERE id=#{id,jdbcType=INTEGER}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM transport_logistics
+		WHERE id=#{id,jdbcType=INTEGER}
+	</delete>
+	<select id="findAll" resultType="TransportLogistics">
+		SELECT * FROM transport_logistics where address is not null and lng is not null and lat is not null
+	</select>
+	<select id="searchByPage" resultType="TransportLogistics">
+		SELECT * FROM transport_logistics
+		<where>
+			<if test="l.companyName != null and l.companyName!=''">
+				`companyName` like
+				CONCAT('%',#{l.companyName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="l.registrationNumber != null and l.registrationNumber!=''">
+				and `registrationNumber` like
+				CONCAT('%',#{l.registrationNumber,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+		limit #{pageUtil.begin},#{pageUtil.length}
+	</select>
+	<select id="findAllMap" resultType="TransportLogistics">
+		SELECT * FROM transport_logistics
+		<where>
+			<if test="companyName != null and companyName!=''">
+				`companyName` like
+				CONCAT('%',#{companyName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="address != null and address!=''">
+				and `address` like
+				CONCAT('%',#{address,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="tel != null and tel!=''">
+				and `tel` like
+				CONCAT('%',#{tel,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+	</select>
+	<select id="getCount" resultType="long">
+		SELECT COUNT(*) FROM `transport_logistics`
+		<where>
+			<if test="companyName != null and companyName!=''">
+				`companyName` like
+				CONCAT('%',#{companyName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="registrationNumber != null and registrationNumber!=''">
+				and `registrationNumber` like
+				CONCAT('%',#{registrationNumber,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+	</select>
+	<insert id="batchInsert" parameterType="java.util.List">  
+	    insert into transport_logistics (companyName,registrationNumber,address,tel,email,logisticsEmpSum,logisticianEmpNum,isGradeA,vehiclesNumber,ownVehiclesNumber,inkedVehiclesNumber,averageCapacity,capacity,transportLinks,serviceObject,totalValueOfOutput,totalVariableCost,totaFixedCost,year) values  
+	    <foreach collection="list" item="item" index="index"  
+	        separator=",">  
+	        ( #{item.item0}, #{item.item1}, #{item.item2}, #{item.item3}, #{item.item4}, #{item.item5}, #{item.item6}, #{item.item7}, #{item.item8}, #{item.item9}, #{item.item10}, #{item.item11}, #{item.item12}, #{item.item13}, #{item.item14}, #{item.item15}, #{item.item16}, #{item.item17}, #{item.item18})  
+	    </foreach>
+  </insert> 
+  
+  <select id="searchDownload" resultType="java.util.Map">
+		SELECT * FROM transport_logistics
+		<where>
+			<if test="companyName != null and companyName!=''">
+				`companyName` like
+				CONCAT('%',#{companyName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="registrationNumber != null and registrationNumber!=''">
+				and `registrationNumber` like
+				CONCAT('%',#{registrationNumber,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+	</select>
+	<select id="getCountNOLocation" resultType="long">
+		SELECT COUNT(*) FROM `transport_logistics` where (lng is null or lat is null) and address is not null
+	</select>
+	
+	<select id="getOne" resultType="java.util.Map">
+		SELECT * FROM `transport_logistics` where (lng is null or lat is null) and address is not null limit 1
+	</select>
+	
+	<update id="updateNOLocation" parameterType="java.util.Map">
+		update transport_logistics set lng = #{lng} , lat = #{lat} where id = #{id}
+	</update>
+</mapper>

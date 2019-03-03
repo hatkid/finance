@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finance.dao.TransportInformationMapper">
+	<insert id="insert" parameterType="TransportInformationPublish" flushCache="true"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		publishinformation (startProvince,startCity,startCounty,startAddress,endProvince,endCity,endCounty,endAddress,details,vehicleLoad,contact,tel,effectiveTime,creater,realCreater,remarks,review,reviewer,createTime,type)
+		VALUES(#{startProvince},#{startCity},#{startCounty},#{startAddress},#{endProvince},#{endCity},#{endCounty},#{endAddress},#{details},#{vehicleLoad},#{contact},#{tel}
+		,#{effectiveTime},#{creater},#{realCreater},#{remarks},#{review},#{reviewer},#{createTime},#{type})
+	</insert>
+	
+	<select id="searchByPage" resultType="java.util.Map" >
+		SELECT * FROM publishinformation where 1=1 
+			<if test="type != null and type != ''">
+				and `type` =  #{type}
+			</if>
+			<if test="review != null and review != ''">
+				and `review` =  #{review}
+			</if>
+			<if test="createTime1 != null and createTime1 != ''">
+				and  `createTime` &gt; #{createTime1}
+			</if>
+			<if test="createTime2 != null and createTime2 != ''">
+				and `createTime` &lt; #{createTime2}
+			</if>
+			<if test="startProvince != null and startProvince != ''">
+				and `startProvince` like
+				CONCAT('%',#{startProvince,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="endProvince != null and endProvince != ''">
+				and `endProvince` like
+				CONCAT('%',#{endProvince,jdbcType=VARCHAR},'%')
+			</if>
+			
+			
+		limit #{start},#{limit}
+	</select>
+	
+	<select id="getCount" resultType="long">
+		SELECT COUNT(*) FROM `publishinformation` where 1=1 
+			<if test="type != null and type != ''">
+				and `type` =  #{type}
+			</if>
+			<if test="review != null and review != ''">
+				and `review` =  #{review}
+			</if>
+			<if test="createTime1 != null and createTime1 != ''">
+				and  `createTime` &gt; #{createTime1}
+			</if>
+			<if test="createTime2 != null and createTime2 != ''">
+				and `createTime` &lt; #{createTime2}
+			</if>
+			<if test="startProvince != null and startProvince != ''">
+				and `startProvince` like
+				CONCAT('%',#{startProvince,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="endProvince != null and endProvince != ''">
+				and `endProvince` like
+				CONCAT('%',#{endProvince,jdbcType=VARCHAR},'%')
+			</if>
+	</select>
+	
+	<update id="savePass" >
+		update publishinformation set review = 1, reviewer = #{userName}, reviewTime = #{reviewTime}  where id in
+		<foreach collection="ids" index="index" item="item" open="(" separator="," close=")"> 
+            #{item} 
+        </foreach> 
+	</update>
+	
+	<update id="saveFail" >
+		update publishinformation set review = 2, reviewer = #{userName}, reviewTime = #{reviewTime} where id in
+		<foreach collection="ids" index="index" item="item" open="(" separator="," close=")"> 
+            #{item} 
+        </foreach> 
+	</update>
+	
+	
+	<select id="searchByPageNews" resultType="java.util.Map" >
+		<if test="name == 'system'">
+			SELECT * FROM notice where myid is null
+		</if> 
+		<if test="name != 'system'">
+			SELECT * FROM notice where  myid is null  and vestInCompany = (select vestInCompany from users u where u.name = #{name} )
+		</if>
+		
+		limit #{start},#{limit}
+	</select>
+	
+	<select id="getCountNews" resultType="long">
+		<if test="name == 'system'">
+			SELECT count(*) FROM notice where myid is null 
+		</if>
+		<if test="name != 'system'">
+			SELECT count(*) FROM notice where  myid is null  and vestInCompany = (select vestInCompany from users u where u.name = #{name} )
+		</if>
+	</select>
+	
+	<select id="detail" resultType="java.util.Map">
+		SELECT * FROM `notice` where id = #{id}
+	</select>
+	
+</mapper>

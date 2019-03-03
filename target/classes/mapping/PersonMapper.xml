@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finance.dao.PersonMapper">
+	<select id="findById" parameterType="int" resultType="Person">
+		SELECT *
+		FROM person WHERE id=#{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="Person" flushCache="true"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		person(name,sex,nature,tel,address,remark,idNumber,creater,createDate,vestInCompany)
+		VALUES(#{name,jdbcType=VARCHAR},#{sex,jdbcType=VARCHAR},#{nature,jdbcType=VARCHAR},#{tel,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{idNumber,jdbcType=VARCHAR},#{creater,jdbcType=VARCHAR},#{createDate,jdbcType=DATE},#{vestInCompany})
+	</insert>
+	<insert id="addMsg" useGeneratedKeys="true" keyProperty="id" parameterType="com.finance.entity.Message">
+		INSERT INTO
+		message(content)
+		VALUES(#{content})
+	</insert>
+	<insert id="addMsgLog" parameterType="java.util.List">  
+		INSERT INTO
+		message_log(receiver,sender,sendTime,status,msgId)
+		VALUES
+		<foreach collection="list" item="item" index="index"  
+	        separator=",">  
+	        ( #{item.receiver}, #{item.sender}, #{item.sendTime}, #{item.status}, #{item.msgId})  
+	    </foreach>
+	</insert>
+	<insert id="addOneMsgLog">
+		INSERT INTO
+		message_log(receiver,sender,sendTime,status,msgId)
+		VALUES(#{receiver},#{sender},#{sendTime},#{status},#{msgId})
+	</insert>
+	<update id="update" parameterType="Person">
+		UPDATE person SET
+		name=#{name,jdbcType=VARCHAR},sex=#{sex,jdbcType=VARCHAR},nature=#{nature,jdbcType=VARCHAR},tel=#{tel,jdbcType=VARCHAR},address=#{address,jdbcType=VARCHAR},remark=#{remark,jdbcType=VARCHAR},idNumber=#{idNumber,jdbcType=VARCHAR},creater=#{creater,jdbcType=VARCHAR},createDate=#{createDate,jdbcType=DATE},vestInCompany=#{vestInCompany}
+		WHERE id=#{id,jdbcType=INTEGER}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM person
+		WHERE id=#{id,jdbcType=INTEGER}
+	</delete>
+	<select id="findAll" resultType="Person">
+		SELECT * FROM person
+	</select>
+	<select id="findAllMap" resultType="ServiceLogistics">
+		SELECT * FROM person
+	</select>
+	<select id="searchByPage" resultType="Person">
+		SELECT * FROM person
+		<where>
+			<if test="l.name != null and l.name!=''">
+				`name` like
+				CONCAT('%',#{l.name,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="l.tel != null and l.tel!=''">
+				and `tel` like
+				CONCAT('%',#{l.tel,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="l.idNumber != null and l.idNumber!=''">
+				and `idNumber` like
+				CONCAT('%',#{l.idNumber,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="l.sex != null and l.sex!=''">
+				and `sex` =#{l.sex}
+			</if>
+			<if test="l.vestInCompany != null and l.vestInCompany!=''">
+				and `vestInCompany` like
+				CONCAT('%',#{l.vestInCompany},'%')
+			</if>
+		</where>
+		limit #{pageUtil.begin},#{pageUtil.end}
+	</select>
+	<select id="getCount" resultType="long">
+		SELECT COUNT(*) FROM `person`
+		<where>
+			<if test="name != null and name!=''">
+				`name` like
+				CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="tel != null and tel!=''">
+				and `tel` like
+				CONCAT('%',#{tel,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="idNumber != null and idNumber!=''">
+				and `idNumber` like
+				CONCAT('%',#{idNumber,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="sex != null and sex!=''">
+				and `sex` =#{sex}
+			</if>
+			<if test="vestInCompany != null and vestInCompany!=''">
+				and `vestInCompany` like
+				CONCAT('%',#{vestInCompany},'%')
+			</if>
+		</where>
+	</select>
+	<insert id="batchInsert" parameterType="java.util.List">  
+	    insert into person (name,sex,nature,tel,address,remark,idNumber,creater,createDate,vestInCompany) values  
+	    <foreach collection="list" item="item" index="index"  
+	        separator=",">  
+	        ( #{item.item0}, #{item.item1}, #{item.item2}, #{item.item3}, #{item.item4}, #{item.item5}, #{item.item6}, #{item.item7}, #{item.item8}, #{item.item9})  
+	    </foreach>
+  </insert> 
+  
+  <select id="searchDownload" resultType="java.util.Map">
+		SELECT * FROM person
+		<where>
+			<if test="name != null and name!=''">
+				`name` like
+				CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="tel != null and tel!=''">
+				and `tel` like
+				CONCAT('%',#{tel,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+	</select>
+</mapper>

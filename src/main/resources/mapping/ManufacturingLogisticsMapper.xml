@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finance.dao.ManufacturingLogisticsMapper">
+	<select id="findById" parameterType="int" resultType="ManufacturingLogistics">
+		SELECT *
+		FROM manufacturing_logistics WHERE id=#{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="ManufacturingLogistics" flushCache="true"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		manufacturing_logistics(companyName,address,tel,email,registrationNumber,logisticsEmpSum,logisticianEmpNum,selfRunLogisticsTotalCost,storageType,storageArea,deviceNum,isLogisticsOutsourcing,outsourcingType,outsourcingCompanyName,outsourcingCost,companyType,collaborationTime,isRentStorage,rentStorageArea,logisticsType,rentStorageCost,year,lng,lat)
+		VALUES(#{companyName,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{tel,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{registrationNumber,jdbcType=VARCHAR},#{logisticsEmpSum,jdbcType=SMALLINT},#{logisticianEmpNum,jdbcType=SMALLINT},#{selfRunLogisticsTotalCost,jdbcType=FLOAT},#{storageType,jdbcType=VARCHAR},#{storageArea,jdbcType=FLOAT},#{deviceNum,jdbcType=SMALLINT},#{isLogisticsOutsourcing,jdbcType=TINYINT},#{outsourcingType,jdbcType=VARCHAR},#{outsourcingCompanyName,jdbcType=VARCHAR},#{outsourcingCost,jdbcType=FLOAT},#{companyType,jdbcType=VARCHAR},#{collaborationTime,jdbcType=VARCHAR},#{isRentStorage,jdbcType=TINYINT},#{rentStorageArea,jdbcType=FLOAT},#{logisticsType,jdbcType=VARCHAR},#{rentStorageCost,jdbcType=FLOAT},#{year,jdbcType=VARCHAR},#{lng},#{lat})
+	</insert>
+	<update id="update" parameterType="ManufacturingLogistics">
+		UPDATE manufacturing_logistics SET
+		lng=#{lng},lat=#{lat},companyName=#{companyName,jdbcType=VARCHAR},address=#{address,jdbcType=VARCHAR},tel=#{tel,jdbcType=VARCHAR},email=#{email,jdbcType=VARCHAR},registrationNumber=#{registrationNumber,jdbcType=VARCHAR},logisticsEmpSum=#{logisticsEmpSum,jdbcType=SMALLINT},logisticianEmpNum=#{logisticianEmpNum,jdbcType=SMALLINT},selfRunLogisticsTotalCost=#{selfRunLogisticsTotalCost,jdbcType=FLOAT},storageType=#{storageType,jdbcType=VARCHAR},storageArea=#{storageArea,jdbcType=FLOAT},deviceNum=#{deviceNum,jdbcType=SMALLINT},isLogisticsOutsourcing=#{isLogisticsOutsourcing,jdbcType=TINYINT},outsourcingType=#{outsourcingType,jdbcType=VARCHAR},outsourcingCompanyName=#{outsourcingCompanyName,jdbcType=VARCHAR},outsourcingCost=#{outsourcingCost,jdbcType=FLOAT},companyType=#{companyType,jdbcType=VARCHAR},collaborationTime=#{collaborationTime,jdbcType=VARCHAR},isRentStorage=#{isRentStorage,jdbcType=TINYINT},rentStorageArea=#{rentStorageArea,jdbcType=FLOAT},logisticsType=#{logisticsType,jdbcType=VARCHAR},rentStorageCost=#{rentStorageCost,jdbcType=FLOAT},year=#{year,jdbcType=VARCHAR}
+		WHERE id=#{id,jdbcType=INTEGER}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM manufacturing_logistics
+		WHERE id=#{id,jdbcType=INTEGER}
+	</delete>
+	<select id="findAll" resultType="ManufacturingLogistics">
+		SELECT * FROM manufacturing_logistics where address is not null and lng is not null and lat is not null
+	</select>
+	<select id="searchByPage" resultType="ManufacturingLogistics">
+		SELECT * FROM manufacturing_logistics
+		<where>
+			<if test="l.companyName != null and l.companyName!=''">
+				`companyName` like
+				CONCAT('%',#{l.companyName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="l.registrationNumber != null and l.registrationNumber!=''">
+				and `registrationNumber` like
+				CONCAT('%',#{l.registrationNumber,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+		limit #{pageUtil.begin},#{pageUtil.length}
+	</select>
+	<select id="findAllMap" resultType="ManufacturingLogistics">
+		SELECT * FROM manufacturing_logistics
+		<where>
+			<if test="companyName != null and companyName!=''">
+				`companyName` like
+				CONCAT('%',#{companyName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="address != null and address!=''">
+				and `address` like
+				CONCAT('%',#{address,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="tel != null and tel!=''">
+				and `tel` like
+				CONCAT('%',#{tel,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+	</select>
+	<select id="getCount" resultType="long">
+		SELECT COUNT(*) FROM `manufacturing_logistics`
+		<where>
+			<if test="companyName != null and companyName!=''">
+				`companyName` like
+				CONCAT('%',#{companyName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="registrationNumber != null and registrationNumber!=''">
+				and `registrationNumber` like
+				CONCAT('%',#{registrationNumber,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+	</select>
+	<insert id="batchInsert" parameterType="java.util.List">  
+	    insert into manufacturing_logistics (companyName,address,tel,email,registrationNumber,logisticsEmpSum,logisticianEmpNum,selfRunLogisticsTotalCost,storageType,storageArea,deviceNum,isLogisticsOutsourcing,outsourcingType,outsourcingCompanyName,outsourcingCost,companyType,collaborationTime,isRentStorage,rentStorageArea,logisticsType,rentStorageCost,year) values  
+	    <foreach collection="list" item="item" index="index"  
+	        separator=",">  
+	        ( #{item.item0}, #{item.item1}, #{item.item2}, #{item.item3}, #{item.item4}, #{item.item5}, #{item.item6}, #{item.item7}, #{item.item8}, #{item.item9}, #{item.item10}, #{item.item11}, #{item.item12}, #{item.item13}, #{item.item14}, #{item.item15}, #{item.item16}, #{item.item17}, #{item.item18}, #{item.item19}, #{item.item20}, #{item.item21})  
+	    </foreach>
+  </insert> 
+  
+  <select id="searchDownload" resultType="java.util.Map">
+		SELECT * FROM manufacturing_logistics
+		<where>
+			<if test="companyName != null and companyName!=''">
+				`companyName` like
+				CONCAT('%',#{companyName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="registrationNumber != null and registrationNumber!=''">
+				and `registrationNumber` like
+				CONCAT('%',#{registrationNumber,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+	</select>
+	<select id="getCountNOLocation" resultType="long">
+		SELECT COUNT(*) FROM `manufacturing_logistics` where (lng is null or lat is null) and address is not null
+	</select>
+	
+	<select id="getOne" resultType="java.util.Map">
+		SELECT * FROM `manufacturing_logistics` where (lng is null or lat is null) and address is not null limit 1
+	</select>
+	
+	<update id="updateNOLocation" parameterType="java.util.Map">
+		update manufacturing_logistics set lng = #{lng} , lat = #{lat} where id = #{id}
+	</update>
+</mapper>
