@@ -38,4 +38,9 @@
 		select count(*) from
 		companyfinance
 	</select>
+
+	<select id="getCountByCompanyName" resultType="int">
+		select count(*) from companyfinance c where c.companyname = #{companyName,jdbcType=VARCHAR}
+	</select>	
+	
 </mapper>

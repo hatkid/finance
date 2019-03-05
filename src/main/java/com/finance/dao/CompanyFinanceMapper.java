@@ -18,4 +18,5 @@ public interface CompanyFinanceMapper extends BaseMapper<CompanyFinance> {
 	int updateNOLocation(Map<String,Object> paramMap);
     Long getCountNOLocation();
     Map<String, Object> getOne();
+    int getCountByCompanyName(String companyName);
 }

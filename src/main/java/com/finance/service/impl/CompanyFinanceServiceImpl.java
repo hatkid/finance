@@ -78,4 +78,12 @@ public class CompanyFinanceServiceImpl extends
 	public Map<String, Object> getOne(){
 		return companyFinanceMapper.getOne();
 	}
+
+	/**
+	 * 根据公司名字查询是否已经存在
+	 */
+	@Override
+	public int getCountByCompanyName(String companyName) {
+		return companyFinanceMapper.getCountByCompanyName(companyName);
+	}
 }

@@ -1,11 +1,14 @@
 package com.finance.controller;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.aspectj.weaver.JoinPointSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,11 +61,18 @@ public class MgrCompanyFinanceController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdate")
 	public String saveOrUpdate(CompanyFinance companyFinance) {
-		
-		// 校验
+		Json json = null;
+		// 校验公司名字是否存在
+		int result = companyFinanceService.getCountByCompanyName(companyFinance.getCompanyName());
+		if (result > 0) {
+			json = new Json();
+			json.setStatus(false);
+			json.setMessage("添加公司名字重复");
+			return JSONArray.toJSONString(json);
+		}
 		
 		EntityUtil.setCommonInfo(companyFinance);
-		Json json = getMessage(companyFinanceService
+		json = getMessage(companyFinanceService
 				.persistence(companyFinance));
 		return JSONArray.toJSONString(json);
 	}
