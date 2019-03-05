@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.finance.dao.BaseMapper;
 import com.finance.dao.BusinessManagementMapper;
 import com.finance.dao.ColdchainLogisticsMapper;
+import com.finance.dao.CompanyFinanceMapper;
 import com.finance.dao.CompanyMapper;
 import com.finance.dao.ForwarderLogisticsMapper;
 import com.finance.dao.GardenLogisticsMapper;
@@ -74,6 +75,10 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	protected TransportInformationMapper transportInformationPublishMapper;
 	@Autowired
 	protected NoticeMapper noticeMapper;
+	
+	// 财务软件相关mapper
+	@Autowired
+	protected CompanyFinanceMapper companyFinanceMapper;
 
 	@SuppressWarnings("rawtypes")
 	private Class clazz = null;

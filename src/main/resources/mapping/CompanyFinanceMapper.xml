@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finance.dao.CompanyFinanceMapper">
+	<insert id="insert" parameterType="CompanyFinance"
+		flushCache="true" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		companyfinance(companyName,loanAmount,arrears,paid,totalArrears,channel,row_creater,row_modifier,row_create_time,row_modify_time)
+		VALUES(#{companyName,jdbcType=VARCHAR},#{loanAmount,jdbcType=DOUBLE},#{arrears,jdbcType=DOUBLE},#{paid,jdbcType=DOUBLE},#{totalArrears,jdbcType=DOUBLE},#{channel,jdbcType=TINYINT},#{row_creater,jdbcType=VARCHAR},
+		#{row_modifier,jdbcType=TINYINT},str_to_date(#{row_create_time},'%Y-%m-%d %H:%i:%s'),str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s'))
+	</insert>
+	<update id="update" parameterType="CompanyFinance">
+		UPDATE companyfinance SET
+		companyName = #{companyName},
+		loanAmount = #{loanAmount},
+		arrears = #{arrears},
+		paid = #{paid},
+		totalArrears = #{totalArrears}
+		WHERE id=#{id,jdbcType=INTEGER}
+	</update>
+	<update id="delete" parameterType="int">
+		UPDATE companyfinance SET
+		rows_state = 0
+		WHERE id=#{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="searchByPage" resultType="CompanyFinance">
+		select * from companyfinance
+		where row_state = 1
+		<if test="companyName != null and companyName!=''">
+			and companyName like
+			CONCAT('%',TRIM(#{companyName,jdbcType=VARCHAR}),'%')
+		</if>
+		order by row_create_time desc
+	</select>
+
+	<select id="getCount" resultType="long">
+		select count(*) from
+		companyfinance
+	</select>
+</mapper>

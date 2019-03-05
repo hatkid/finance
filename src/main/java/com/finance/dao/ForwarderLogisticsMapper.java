@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.finance.entity.ForwarderLogistics;
-import com.finance.entity.ForwarderLogistics;
 import com.finance.utils.PageUtil;
 
 public interface ForwarderLogisticsMapper extends BaseMapper<ForwarderLogistics> {

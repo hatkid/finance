@@ -57,6 +57,7 @@
         <property name="typeAliasesPackage" value="com.finance.entity"/>
         
         <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
