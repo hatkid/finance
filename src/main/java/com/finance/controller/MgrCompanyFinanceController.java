@@ -62,8 +62,9 @@ public class MgrCompanyFinanceController extends BaseController {
 	@RequestMapping(value = "/saveOrUpdate")
 	public String saveOrUpdate(CompanyFinance companyFinance) {
 		Json json = null;
-		// 校验公司名字是否存在
-		int result = companyFinanceService.getCountByCompanyName(companyFinance.getCompanyName());
+		// 校验公司名字是否存在，
+		// 如果是编辑的话，相同id，名字不能重复
+		int result = companyFinanceService.getCountByCompanyName(companyFinance);
 		if (result > 0) {
 			json = new Json();
 			json.setStatus(false);
@@ -79,13 +80,10 @@ public class MgrCompanyFinanceController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/delete")
-	public String delete(HttpServletRequest request) {
-		int id = 0;
-		if (!StringUtils.isEmpty(request.getParameter("id"))) {
-			id = Integer.parseInt(request.getParameter("id"));
-		}
+	public String delete(CompanyFinance companyFinance) {
 		Json json = new Json();
-		int flag = companyFinanceService.delete(id);
+		EntityUtil.setCommonInfo(companyFinance);
+		int flag = companyFinanceService.delete(companyFinance);
 		if (flag > 0) {
 			json.setStatus(true);
 			json.setMessage(Constants.POST_DATA_SUCCESS);

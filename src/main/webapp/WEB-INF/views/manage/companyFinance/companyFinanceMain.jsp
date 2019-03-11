@@ -118,112 +118,118 @@
 				width : width,
 				editor : 'text'
 			}] ],
-			toolbar : '#tb'
-		});
-
-		$("#add").click(function() {
-			$.modalDialog({
-				title : "添加数据",
-				width : 300,
-				height : 300,
-				href : "manage/companyFinance/editDlg",
-				buttons : [ {
-					text : '保存',
-					iconCls : 'icon-yes',
-					handler : function() {
-						$.modalDialog.openner = $grid;
-						var f = $.modalDialog.handler.find("#form");
-						f.submit();
-					}
-				}, {
-					text : '取消',
-					iconCls : 'icon-no',
-					handler : function() {
-						$.modalDialog.handler.dialog('destroy');
-						$.modalDialog.handler = undefined;
-					}
-				} ]
-			});
-		});
-
-		$("#update").click(function() {
-			var row = $dg.datagrid('getSelected');
-			if (row) {
-				$.modalDialog({
-					title : "编辑数据",
-					width : 300,
-					height : 300,
-					href : "manage/companyFinance/editDlg",
-					onLoad : function() {
-						var f = $.modalDialog.handler.find("#form");
-						f.form("load", row);
-					},
-					buttons : [ {
-						text : '编辑',
-						iconCls : 'icon-yes',
-						handler : function() {
-							$.modalDialog.openner = $grid;
-							var f = $.modalDialog.handler.find("#form");
-							f.submit();
-						}
-					}, {
-						text : '取消',
-						iconCls : 'icon-no',
-						handler : function() {
-							$.modalDialog.handler.dialog('destroy');
-							$.modalDialog.handler = undefined;
-						}
-					} ]
-				});
-			} else {
-				$.messager.show({
-					title : "提示",
-					msg : "请选择一行记录!",
-					timeout : 1000 * 2
-				});
-			}
-		});
-
-		$("#delete").click(function() {
-			var node = $dg.datagrid('getSelected');
-			if (node) {
-				var rowIndex = $dg.datagrid('getRowIndex', node);
-				$.messager.confirm("提示", "确定要删除记录吗?", function(result) {
-					if (result) {
-						$.ajax({
-							url : "manage/companyFinance/delete",
-							data : {
-								'id' : node.id
+			toolbar :  [{
+				text:"新增",
+				iconCls: 'icon-add',
+				handler: function(){
+					$.modalDialog({
+						title : "添加数据",
+						width : 300,
+						height : 300,
+						href : "manage/companyFinance/editDlg",
+						buttons : [ {
+							text : '保存',
+							iconCls : 'icon-yes',
+							handler : function() {
+								$.modalDialog.openner = $grid;
+								var f = $.modalDialog.handler.find("#form");
+								f.submit();
+							}
+						}, {
+							text : '取消',
+							iconCls : 'icon-no',
+							handler : function() {
+								$.modalDialog.handler.dialog('destroy');
+								$.modalDialog.handler = undefined;
+							}
+						} ]
+					});
+				}
+			},'-',{
+				text:"编辑",
+				iconCls: 'icon-edit',
+				handler: function(){
+					var row = $dg.datagrid('getSelected');
+					if (row) {
+						$.modalDialog({
+							title : "编辑数据",
+							width : 300,
+							height : 300,
+							href : "manage/companyFinance/editDlg",
+							onLoad : function() {
+								var f = $.modalDialog.handler.find("#form");
+								f.form("load", row);
 							},
-							method : "POST",
-							dataType : "JSON",
-							success : function(rsp) {
-								if (rsp.status) {
-									$dg.datagrid('deleteRow', rowIndex);
+							buttons : [ {
+								text : '编辑',
+								iconCls : 'icon-yes',
+								handler : function() {
+									$.modalDialog.openner = $grid;
+									var f = $.modalDialog.handler.find("#form");
+									f.submit();
 								}
-								$.messager.show({
-									title : rsp.title,
-									msg : rsp.message,
-									timeout : 1000 * 2
-								});
-							},
-							error : function() {
-								$.messager.show({
-									title : "提示",
-									msg : "提交错误了！",
-									timeout : 1000 * 2
+							}, {
+								text : '取消',
+								iconCls : 'icon-no',
+								handler : function() {
+									$.modalDialog.handler.dialog('destroy');
+									$.modalDialog.handler = undefined;
+								}
+							} ]
+						});
+					} else {
+						$.messager.show({
+							title : "提示",
+							msg : "请选择一行记录!",
+							timeout : 1000 * 2
+						});
+					}
+				}
+			},'-',{
+				text:"删除",
+				iconCls: 'icon-remove',
+				handler: function(){
+					var node = $dg.datagrid('getSelected');
+					if (node) {
+						var rowIndex = $dg.datagrid('getRowIndex', node);
+						$.messager.confirm("提示", "确定要删除记录吗?", function(result) {
+							if (result) {
+								$.ajax({
+									url : "manage/companyFinance/delete",
+									data : {
+										'id' : node.id
+									},
+									method : "POST",
+									dataType : "JSON",
+									success : function(rsp) {
+										if (rsp.status) {
+											$dg.datagrid('deleteRow', rowIndex);
+										}
+										$.messager.show({
+											title : rsp.title,
+											msg : rsp.message,
+											timeout : 1000 * 2
+										});
+									},
+									error : function() {
+										$.messager.show({
+											title : "提示",
+											msg : "提交错误了！",
+											timeout : 1000 * 2
+										});
+									}
 								});
 							}
 						});
+					} else {
+						$.messager.show({
+							title : "提示",
+							msg : "请选择一行记录!",
+							timeout : 1000 * 2
+						});
 					}
-				});
-			} else {
-				$.messager.show({
-					title : "提示",
-					msg : "请选择一行记录!",
-					timeout : 1000 * 2
-				});
-			}
+				}
+			}]
 		});
 		$("#search").click(function() {
 			$('#dg').datagrid('load', {
@@ -238,29 +244,7 @@
 </head>
 <body>
 	<div class="rightinfo">
-		<div class="easyui-layout" id="tb">
-			<span style="display:inline-block;width:60%;word-wrap:break-word;white-space:normal;">
-				<shiro:hasPermission name="companyAddFinance">
-					<span id="add" class="mystyle"><img
-						src="resources/core/images/t01.png"
-						style="vertical-align:middle; margin-left: 5px;padding-left:5px;" />
-						添加</span>
-				</shiro:hasPermission>
-				<shiro:hasPermission name="companyEditFinance">
-					<span id="update" class="mystyle"><img
-						src="resources/core/images/t02.png"
-						style="vertical-align:middle; margin-left: 5px;padding-left:5px;" />
-						修改</span>
-				</shiro:hasPermission>
-				<shiro:hasPermission name="companyDelFinance">
-					<span id="delete" class="mystyle"><img
-						src="resources/core/images/t03.png"
-						style="vertical-align:middle; margin-left: 5px;padding-left:5px;" />
-						删除</span>
-				</shiro:hasPermission>
-			</span>
-			<span style="display:inline-block;width:60%;word-wrap:break-word;white-space:normal;">
-				<span style="margin-left: 5px;display:inline;"> 供应商名称:
+			<span style="margin-left: 5px;display:inline;"> 供应商名称:
 					<input id='companyName' data-options="validType:'length[1,100]'"
 							 class='easyui-textbox easyui-validatebox'
 							type='text' />
@@ -271,7 +255,6 @@
 					src="resources/core/images/refresh.png" height="24px" width="24px"
 					style="vertical-align:middle; margin: 5px;padding:5px;" /> 重置</span>
 			</span>
-		</div>
 		<table class="tablelist" id="dg" title="供应商欠款信息统计"></table>
 
 		<div class="tip">

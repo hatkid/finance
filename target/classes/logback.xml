@@ -12,18 +12,18 @@
 		</layout>
 	</appender>
 
-	<logger name="org.springframework" level="error" additivity="false">
+	<logger name="org.springframework" level="warn" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
-	<logger name="com.finance" level="error" additivity="false">
+	<logger name="com.finance" level="warn" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
-	<logger name="com.finance.dao" level="error"/>
+	<logger name="com.finance.dao" level="warn"/>
 	
-	<logger name="dao" level="error"/>
+	<logger name="dao" level="warn"/>
 	
-	<root level="error">
+	<root level="warn">
 		<appender-ref ref="STDOUT" />
 	</root>
 

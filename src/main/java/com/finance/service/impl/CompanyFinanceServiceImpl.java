@@ -47,6 +47,11 @@ public class CompanyFinanceServiceImpl extends
 				.searchByPage( l);
 		return list;
 	}
+	
+	@Override
+	public int delete(CompanyFinance companyFinance) {
+		return companyFinanceMapper.delete(companyFinance);
+	}
 
 	@Override
 	public List<CompanyFinance> findAllMap(Map<String, Object> selectMap) {
@@ -83,7 +88,7 @@ public class CompanyFinanceServiceImpl extends
 	 * 根据公司名字查询是否已经存在
 	 */
 	@Override
-	public int getCountByCompanyName(String companyName) {
-		return companyFinanceMapper.getCountByCompanyName(companyName);
+	public int getCountByCompanyName(CompanyFinance companyFinance) {
+		return companyFinanceMapper.getCountByCompanyName(companyFinance);
 	}
 }

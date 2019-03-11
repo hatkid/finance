@@ -7,7 +7,7 @@
 		INSERT INTO
 		companyfinance(companyName,loanAmount,arrears,paid,totalArrears,channel,row_creater,row_modifier,row_create_time,row_modify_time)
 		VALUES(#{companyName,jdbcType=VARCHAR},#{loanAmount,jdbcType=DOUBLE},#{arrears,jdbcType=DOUBLE},#{paid,jdbcType=DOUBLE},#{totalArrears,jdbcType=DOUBLE},#{channel,jdbcType=TINYINT},#{row_creater,jdbcType=VARCHAR},
-		#{row_modifier,jdbcType=TINYINT},str_to_date(#{row_create_time},'%Y-%m-%d %H:%i:%s'),str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s'))
+		#{row_modifier,jdbcType=INTEGER},str_to_date(#{row_create_time},'%Y-%m-%d %H:%i:%s'),str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s'))
 	</insert>
 	<update id="update" parameterType="CompanyFinance">
 		UPDATE companyfinance SET
@@ -15,12 +15,16 @@
 		loanAmount = #{loanAmount},
 		arrears = #{arrears},
 		paid = #{paid},
-		totalArrears = #{totalArrears}
+		totalArrears = #{totalArrears},
+		row_modifier = #{row_modifier,jdbcType=INTEGER},
+		row_modify_time = str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s')
 		WHERE id=#{id,jdbcType=INTEGER}
 	</update>
-	<update id="delete" parameterType="int">
+	<update id="delete" parameterType="CompanyFinance">
 		UPDATE companyfinance SET
-		rows_state = 0
+		row_state = 0,
+		row_modifier = #{row_modifier,jdbcType=INTEGER},
+		row_modify_time = str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s')
 		WHERE id=#{id,jdbcType=INTEGER}
 	</update>
 
@@ -41,6 +45,9 @@
 
 	<select id="getCountByCompanyName" resultType="int">
 		select count(*) from companyfinance c where c.companyname = #{companyName,jdbcType=VARCHAR}
+		<if test="id != null and id != ''">
+			and c.id != #{id,jdbcType=INTEGER}
+		</if>
 	</select>	
 	
 </mapper>
