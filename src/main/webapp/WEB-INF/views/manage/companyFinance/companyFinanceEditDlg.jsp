@@ -107,18 +107,18 @@ table,th,td {
 						<th>供应商名称</th>
 						<td><input name='companyName' id='companyName' data-options="validType:'length[1,100]'"
 							required='required' class='easyui-textbox easyui-validatebox'
-							type='text' />
+							type='text' style="width:145px;"/>
 						</td>
 					</tr>
 					<tr>
-						<th>货款金额</th>
+						<th>货款金额(元)</th>
 						<td><input name='loanAmount' id='loanAmount' type="text"
 							required='required' class="easyui-numberbox" data-options="min:0,precision:2" />
 						</td>
 					</tr>
 					<tr>
-						<th>年初欠款</th>
-						<td><input name='arrears' id='arrears' required='required' data-options="validType:'number'"
+						<th>年初欠款(元)</th>
+						<td><input name='arrears' id='arrears' required='required' data-options="min:0,precision:2"
 							class='easyui-numberbox' type='number' />
 						</td>
 					</tr>
