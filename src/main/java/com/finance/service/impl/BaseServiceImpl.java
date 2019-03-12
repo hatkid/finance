@@ -25,6 +25,7 @@ import com.finance.dao.RoleMapper;
 import com.finance.dao.RolePermissionMapper;
 import com.finance.dao.ServiceLogisticsMapper;
 import com.finance.dao.StorageLogisticsMapper;
+import com.finance.dao.SupplierDetailMapper;
 import com.finance.dao.TransportInformationMapper;
 import com.finance.dao.TransportLogisticsMapper;
 import com.finance.dao.UserRoleMapper;
@@ -79,6 +80,8 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	// 财务软件相关mapper
 	@Autowired
 	protected CompanyFinanceMapper companyFinanceMapper;
+	@Autowired
+	protected SupplierDetailMapper supplierDetailMapper;
 
 	@SuppressWarnings("rawtypes")
 	private Class clazz = null;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.finance.dao.CompanyFinanceMapper">
+<mapper namespace="com.finance.dao.SupplierDetailMapper">
 	<insert id="insert" parameterType="CompanyFinance"
 		flushCache="true" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
@@ -30,14 +30,20 @@
 		WHERE id=#{id,jdbcType=INTEGER}
 	</update>
 
-	<select id="searchByPage" resultType="CompanyFinance">
-		select * from companyfinance
-		where row_state = 1
-		<if test="companyName != null and companyName!=''">
-			and companyName like
-			CONCAT('%',TRIM(#{companyName,jdbcType=VARCHAR}),'%')
+	<select id="searchByPage" resultType="SupplierDetail">
+		select sd.id id, sd.purchase_name purchaseName, sd.unit, sd.amount, sd.price, sd.total, 
+		sd.paid, sd.payment, date_format(sd.row_create_time, '%Y-%m-%d %H:%i:%s') createTime, cf.companyName from supplierdetail sd, companyfinance cf 
+		where cf.id = sd.company_finance_id and sd.row_state = 1 
+		<if test="companyId != null and companyId!=''">
+			 and sd.company_finance_id = #{companyId,jdbcType=INTEGER}
 		</if>
-		order by row_create_time desc
+		<if test="createTimeStart != null and createTimeStart != ''">
+			 and sd.row_create_time &gt;= str_to_date(#{createTimeStart},'%Y-%m-%d %H:%i:%s')
+		</if>
+		<if test="createTimeEnd != null and createTimeEnd != ''">
+			 and sd.row_create_time &lt;= str_to_date(#{createTimeEnd},'%Y-%m-%d %H:%i:%s')
+		</if>
+		order by sd.row_create_time desc
 	</select>
 
 	<select id="getCountByCompanyName" resultType="int">
@@ -46,5 +52,11 @@
 			and c.id != #{id,jdbcType=INTEGER}
 		</if>
 	</select>	
+	
+	<select id="getCompanyName" resultType="java.util.Map">
+		select cf.companyName, cf.id from companyfinance cf 
+		where cf.row_state = 1
+		order by cf.row_create_time desc
+	</select>
 	
 </mapper>

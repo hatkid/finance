@@ -78,7 +78,7 @@
 		$grid = $dg.datagrid({
 			height : $(this).height() - 80,
 			pagination : true,
-			url : "manage/companyFinance/searchByPage",
+			url : "manage/supplierDetail/searchByPage",
 			rownumbers : true,
 			animate : true,
 			nowrap:false,//允许换行
@@ -89,31 +89,55 @@
 			singleSelect : true,
 			columns : [ [{
 				field : 'companyName',
-				title : '供应商名称',
+				title : '公司名称',
 				align : 'left',
 				width : width,
 				editor : 'text'
 			}, {
-				field : 'loanAmount',
-				title : '货款金额(元)',
+				field : 'purchaseName',
+				title : '采购名称',
 				align : 'left',
 				width : width,
 				editor : 'text'
 			}, {
-				field : 'arrears',
-				title : '年初欠款(元)',
+				field : 'unit',
+				title : '单位',
+				align : 'left',
+				width : width,
+				editor : 'text'
+			}, {
+				field : 'amount',
+				title : '数量',
+				align : 'left',
+				width : width,
+				editor : 'text'
+			}, {
+				field : 'price',
+				title : '单价',
+				align : 'left',
+				width : width,
+				editor : 'text'
+			}, {
+				field : 'total',
+				title : '金额',
 				align : 'left',
 				width : width,
 				editor : 'text'
 			}, {
 				field : 'paid',
-				title : '已付款(元)',
+				title : '已付款',
 				align : 'left',
 				width : width,
 				editor : 'text'
 			}, {
-				field : 'totalArrears',
-				title : '总欠款金额(元)',
+				field : 'payment',
+				title : '付款方式',
+				align : 'left',
+				width : width,
+				editor : 'text'
+			}, {
+				field : 'createTime',
+				title : '日期',
 				align : 'left',
 				width : width,
 				editor : 'text'
@@ -121,19 +145,24 @@
 			toolbar :  "#tb"
 		});
 		$("#search").click(function() {
-			$('#dg').datagrid('load', {
-				companyName : $('#companyName').val()
-			});
+			var queryParams = $("#dg").datagrid("options").queryParams;
+			queryParams["companyId"] = $('#companyName').combobox('getValue');
+			queryParams["createTimeStart"] = $('#createTimeStart').datetimebox('getValue');
+			queryParams["createTimeEnd"] = $('#createTimeEnd').datetimebox('getValue');
+			$("#dg").datagrid("options").queryParams = queryParams;
+			$('#dg').datagrid('load');
 		});
 		$("#searchClean").click(function() {
-			$('#companyName').textbox('setValue','');
+			$('#companyName').combobox('setValue', ''); 
+			$('#createTimeStart').datebox('setValue','');
+			$('#createTimeEnd').datebox('setValue','');
 		});
 		$("#add").click(function() {
 			$.modalDialog({
 				title : "添加数据",
 				width : 300,
 				height : 300,
-				href : "manage/companyFinance/editDlg",
+				href : "manage/supplierDetail/editDlg",
 				buttons : [ {
 					text : '保存',
 					iconCls : 'icon-yes',
@@ -160,7 +189,7 @@
 					title : "编辑数据",
 					width : 300,
 					height : 300,
-					href : "manage/companyFinance/editDlg",
+					href : "manage/supplierDetail/editDlg",
 					onLoad : function() {
 						var f = $.modalDialog.handler.find("#form");
 						f.form("load", row);
@@ -198,7 +227,7 @@
 				$.messager.confirm("提示", "确定要删除记录吗?", function(result) {
 					if (result) {
 						$.ajax({
-							url : "manage/companyFinance/delete",
+							url : "manage/supplierDetail/delete",
 							data : {
 								'id' : node.id
 							},
@@ -239,32 +268,42 @@
 	<div class="rightinfo">
 			<div id="tb">
 				<span style="display:inline-block;width:60%;word-wrap:break-word;white-space:normal;">
-					<shiro:hasPermission name="companyAddFinance">
+					<shiro:hasPermission name="supplierDetailAdd">
 						<span id="add" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">
 							添加</span>
 					</shiro:hasPermission>
-					<shiro:hasPermission name="companyEditFinance">
+					<shiro:hasPermission name="supplierDetailUpdate">
 						<span id="update" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">
 							修改</span>
 					</shiro:hasPermission>
-					<shiro:hasPermission name="companyDelFinance">
+					<shiro:hasPermission name="supplierDetailRemove">
 						<span id="delete" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">
 							删除</span>
 					</shiro:hasPermission>
 				</span>
 			</div>
-			<span style="margin-left: 5px;display:inline;"> 供应商名称:
-					<input id='companyName' data-options="validType:'length[1,100]'"
-							 class='easyui-textbox easyui-validatebox'
-							type='text' />
-				</span> <span id="search" class="mysearch" style="display: inline;"><img
+			<span style="margin-left: 5px;display:inline;"> 公司名称:
+				<input class="easyui-combobox" name="language" id="companyName"
+				data-options="
+					url: 'manage/supplierDetail/getCompanyName',
+					valueField:'id',
+					textField:'companyName'
+				">
+			</span> 
+			<span style="margin-left: 5px;display:inline;"> 创建时间: 
+				<input id="createTimeStart" class="easyui-datebox" />
+			</span> 
+			至
+			<span style="margin-left: 5px;display:inline;">
+				<input id="createTimeEnd" class="easyui-datebox" />
+			</span> 
+			<span id="search" class="mysearch" style="display: inline;"><img
 					src="resources/core/images/ico06.png" height="24px" width="24px"
 					style="vertical-align:middle; margin: 5px;padding:5px;" /> 查询</span> <span
 					id="searchClean" class="mysearch" style="display: inline;"><img
 					src="resources/core/images/refresh.png" height="24px" width="24px"
 					style="vertical-align:middle; margin: 5px;padding:5px;" /> 重置</span>
-			</span>
-		<table class="tablelist" id="dg" title="供应商欠款信息统计"></table>
+		<table class="tablelist" id="dg" title="供应商明细信息统计"></table>
 
 		<div class="tip">
 			<div class="tiptop">

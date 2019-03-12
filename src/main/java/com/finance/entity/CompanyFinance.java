@@ -1,18 +1,8 @@
 package com.finance.entity;
 
-import java.util.Date;
-
-/**
- * ForwarderLogistics entity. @author MyEclipse Persistence Tools
- */
 
 public class CompanyFinance extends CommonEntity implements java.io.Serializable {
 
-	// Fields
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;

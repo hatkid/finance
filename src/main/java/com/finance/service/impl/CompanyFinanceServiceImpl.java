@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.finance.entity.CompanyFinance;
 import com.finance.service.CompanyFinanceService;
 import com.finance.service.ForwarderLogisticsService;
-import com.finance.utils.PageUtil;
 import com.finance.utils.StringUtil;
 
 @Transactional
 @Service("CompanyFinanceService")
+@SuppressWarnings({"unused","rawtypes"})
 public class CompanyFinanceServiceImpl extends
 		BaseServiceImpl<CompanyFinance> implements CompanyFinanceService {
 
@@ -41,6 +41,7 @@ public class CompanyFinanceServiceImpl extends
 		return i > 0;
 	}
 
+
 	@Override
 	public List searchByPage( CompanyFinance l) {
 		List<CompanyFinance> list = companyFinanceMapper
@@ -51,37 +52,6 @@ public class CompanyFinanceServiceImpl extends
 	@Override
 	public int delete(CompanyFinance companyFinance) {
 		return companyFinanceMapper.delete(companyFinance);
-	}
-
-	@Override
-	public List<CompanyFinance> findAllMap(Map<String, Object> selectMap) {
-		return companyFinanceMapper.findAllMap(selectMap);
-	}
-
-	@Override
-	public int batchInsert(List<Map<String, String>> listMap) {
-		
-		return companyFinanceMapper.batchInsert(listMap);
-	}
-	
-	@Override
-	public List searchDownload(Map<String, Object> paramMap){
-		return companyFinanceMapper.searchDownload(paramMap);
-	}
-	
-	@Override
-	public int updateNOLocation(Map<String,Object> paramMap){
-		return companyFinanceMapper.updateNOLocation(paramMap);
-	}
-	
-	@Override
-    public Long getCountNOLocation(){
-		return companyFinanceMapper.getCountNOLocation();
-    }
-	
-	@Override
-	public Map<String, Object> getOne(){
-		return companyFinanceMapper.getOne();
 	}
 
 	/**

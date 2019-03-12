@@ -2,7 +2,7 @@
 <script type="text/javascript">
 	$(function() {
 		$("#form").form({
-			url : "manage/companyFinance/saveOrUpdate",
+			url : "manage/supplierDetail/saveOrUpdate",
 			onSubmit : function() {
 				$.messager.progress({
 					title : '提示',

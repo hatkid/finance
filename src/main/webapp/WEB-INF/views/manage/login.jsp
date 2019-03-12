@@ -33,9 +33,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             
             
         });
+        function load() {
+        	$("form").submit();
+        }
     </script>
 </head>
-<body class="loginbody">
+<body class="loginbody" onload="load()">
     <table class="logintable" border="0" cellspacing="0">
         <tr class="loginhead">
             <td class="headwelcometitle">
@@ -56,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="divinputbox">
                     <div class="divinputboxtitle">登录 Login</div>
                     <div class="divinputboxinput">
-                    <form action="login" method="post">
+                    <form action="login" method="post" id="form">
                         <input type="text" name="username"  class="inputusername" value="system" />
                         <input type="password" name="password"  class="inputpassword" value="system" />
                         <input type="text" class="inputvalidatecode" value="" name="verifyCode" />
