@@ -12,16 +12,16 @@ public class SupplierDetail extends CommonEntity implements java.io.Serializable
 	private String unit;
 	
 	// 数量
-	private int amount;
+	private Integer amount;
 	
 	// 单价
-	private double price;
+	private Double price;
 	
 	// 金额
-	private double total;
+	private Double total;
 	
 	// 已付款
-	private double paid;
+	private Double paid;
 	
 	// 付款方式
 	private String payment;
@@ -39,7 +39,7 @@ public class SupplierDetail extends CommonEntity implements java.io.Serializable
 	private String createTime;
 	
 	// 公司id
-	private int companyId;
+	private Integer companyId;
 	
 	
 	
@@ -47,8 +47,11 @@ public class SupplierDetail extends CommonEntity implements java.io.Serializable
 		
 	}
 
-	public SupplierDetail(Integer id, String purchaseName, String unit, int amount, double price, double total,
-			double paid, String payment) {
+
+
+	public SupplierDetail(Integer id, String purchaseName, String unit, Integer amount, Double price, Double total,
+			Double paid, String payment, String companyName, String createTimeStart, String createTimeEnd,
+			String createTime, Integer companyId) {
 		super();
 		this.id = id;
 		this.purchaseName = purchaseName;
@@ -58,113 +61,168 @@ public class SupplierDetail extends CommonEntity implements java.io.Serializable
 		this.total = total;
 		this.paid = paid;
 		this.payment = payment;
+		this.companyName = companyName;
+		this.createTimeStart = createTimeStart;
+		this.createTimeEnd = createTimeEnd;
+		this.createTime = createTime;
+		this.companyId = companyId;
 	}
+
+
 
 	public Integer getId() {
 		return id;
 	}
 
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+
 
 	public String getPurchaseName() {
 		return purchaseName;
 	}
 
+
+
 	public void setPurchaseName(String purchaseName) {
 		this.purchaseName = purchaseName;
 	}
+
+
 
 	public String getUnit() {
 		return unit;
 	}
 
+
+
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
 
-	public int getAmount() {
+
+
+	public Integer getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+
+
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 
-	public double getPrice() {
+
+
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+
+
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public double getTotal() {
+
+
+	public Double getTotal() {
 		return total;
 	}
 
-	public void setTotal(double total) {
+
+
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 
-	public double getPaid() {
+
+
+	public Double getPaid() {
 		return paid;
 	}
 
-	public void setPaid(double paid) {
+
+
+	public void setPaid(Double paid) {
 		this.paid = paid;
 	}
+
+
 
 	public String getPayment() {
 		return payment;
 	}
 
+
+
 	public void setPayment(String payment) {
 		this.payment = payment;
 	}
+
+
 
 	public String getCompanyName() {
 		return companyName;
 	}
 
+
+
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+
+
 
 	public String getCreateTimeStart() {
 		return createTimeStart;
 	}
 
+
+
 	public void setCreateTimeStart(String createTimeStart) {
 		this.createTimeStart = createTimeStart;
 	}
+
+
 
 	public String getCreateTimeEnd() {
 		return createTimeEnd;
 	}
 
+
+
 	public void setCreateTimeEnd(String createTimeEnd) {
 		this.createTimeEnd = createTimeEnd;
 	}
 
-	public int getCompanyId() {
-		return companyId;
-	}
 
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
-	}
 
 	public String getCreateTime() {
 		return createTime;
 	}
 
+
+
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	
-	
+
+
+
+	public Integer getCompanyId() {
+		return companyId;
+	}
+
+
+
+	public void setCompanyId(Integer companyId) {
+		this.companyId = companyId;
+	}
 
 	
 	

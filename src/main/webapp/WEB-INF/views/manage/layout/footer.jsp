@@ -6,6 +6,6 @@
         text-align: center;
     }
 </style>
-<div class="footer">Copyright © 2015 www.4Tiro.com belongs to
+<div class="footer">Copyright © 2019 belongs to
     lvzhi. All Rights Reserved.
 </div>

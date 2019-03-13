@@ -2,28 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.finance.dao.SupplierDetailMapper">
-	<insert id="insert" parameterType="CompanyFinance"
+	<insert id="insert" parameterType="SupplierDetail"
 		flushCache="true" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
-		companyfinance(companyName,loanAmount,arrears,paid,totalArrears,channel,row_creater,row_modifier,row_create_time,row_modify_time)
-		VALUES(#{companyName,jdbcType=VARCHAR},#{loanAmount,jdbcType=DOUBLE},#{arrears,jdbcType=DOUBLE},#{paid,jdbcType=DOUBLE},#{totalArrears,jdbcType=DOUBLE},#{channel,jdbcType=TINYINT},#{row_creater,jdbcType=VARCHAR},
+		supplierdetail(company_finance_id,purchase_name,unit,amount,price,total,paid,payment,row_creater,row_modifier,row_create_time,row_modify_time)
+		VALUES(#{companyId,jdbcType=INTEGER},#{purchaseName,jdbcType=VARCHAR},
+		#{unit,jdbcType=DOUBLE},#{amount,jdbcType=DOUBLE},#{price,jdbcType=DOUBLE},
+		#{total,jdbcType=DOUBLE},#{paid,jdbcType=DOUBLE},#{payment,jdbcType=VARCHAR},
+		#{row_creater,jdbcType=VARCHAR},
 		#{row_modifier,jdbcType=INTEGER},str_to_date(#{row_create_time},'%Y-%m-%d %H:%i:%s'),str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s'))
 	</insert>
 	
-	<update id="update" parameterType="CompanyFinance">
-		UPDATE companyfinance SET
-		companyName = #{companyName},
-		loanAmount = #{loanAmount},
-		arrears = #{arrears},
+	<update id="update" parameterType="SupplierDetail">
+		UPDATE supplierdetail SET
+		company_finance_id = #{companyId},
+		purchase_name = #{purchaseName},
+		unit = #{unit},
+		amount = #{amount},
+		price = #{price},
+		total = #{total},
 		paid = #{paid},
-		totalArrears = #{totalArrears},
+		payment = #{payment},
 		row_modifier = #{row_modifier,jdbcType=INTEGER},
 		row_modify_time = str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s')
 		WHERE id=#{id,jdbcType=INTEGER}
 	</update>
 	
-	<update id="delete" parameterType="CompanyFinance">
-		UPDATE companyfinance SET
+	<update id="delete" parameterType="SupplierDetail">
+		UPDATE supplierdetail SET
 		row_state = 0,
 		row_modifier = #{row_modifier,jdbcType=INTEGER},
 		row_modify_time = str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s')
@@ -32,7 +38,7 @@
 
 	<select id="searchByPage" resultType="SupplierDetail">
 		select sd.id id, sd.purchase_name purchaseName, sd.unit, sd.amount, sd.price, sd.total, 
-		sd.paid, sd.payment, date_format(sd.row_create_time, '%Y-%m-%d %H:%i:%s') createTime, cf.companyName from supplierdetail sd, companyfinance cf 
+		sd.paid, sd.payment, date_format(sd.row_create_time, '%Y-%m-%d %H:%i:%s') createTime, cf.companyName, cf.id companyId from supplierdetail sd, companyfinance cf 
 		where cf.id = sd.company_finance_id and sd.row_state = 1 
 		<if test="companyId != null and companyId!=''">
 			 and sd.company_finance_id = #{companyId,jdbcType=INTEGER}
@@ -45,13 +51,6 @@
 		</if>
 		order by sd.row_create_time desc
 	</select>
-
-	<select id="getCountByCompanyName" resultType="int">
-		select count(*) from companyfinance c where c.companyname = #{companyName,jdbcType=VARCHAR}
-		<if test="id != null and id != ''">
-			and c.id != #{id,jdbcType=INTEGER}
-		</if>
-	</select>	
 	
 	<select id="getCompanyName" resultType="java.util.Map">
 		select cf.companyName, cf.id from companyfinance cf 

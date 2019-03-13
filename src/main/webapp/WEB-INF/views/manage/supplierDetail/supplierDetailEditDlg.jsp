@@ -99,27 +99,61 @@ table,th,td {
 			<fieldset>
 				<legend>
 					<img src="resources/core/images/fromedit.png"
-						style="margin-bottom: -3px;" /> 企业信息编辑
+						style="margin-bottom: -3px;" /> 明细信息显示
 				</legend>
 				<input name="id" id="id" type="hidden" />
 				<table>
 					<tr>
 						<th>供应商名称</th>
-						<td><input name='companyName' id='companyName' data-options="validType:'length[1,100]'"
-							required='required' class='easyui-textbox easyui-validatebox'
-							type='text' style="width:145px;"/>
+						<td>
+							<input class="easyui-combobox" name="companyId" id="companyId"
+								data-options="
+									url: 'manage/supplierDetail/getCompanyName',
+									valueField:'id',
+									textField:'companyName'
+								">
 						</td>
 					</tr>
 					<tr>
-						<th>货款金额(元)</th>
-						<td><input name='loanAmount' id='loanAmount' type="number"
-							required='required' class="easyui-numberbox" data-options="min:0,precision:2" />
+						<th>采购名称</th>
+						<td><input name='purchaseName' id='purchaseName' type="text"
+							required='required' class="easyui-textbox easyui-validatebox" />
 						</td>
 					</tr>
 					<tr>
-						<th>年初欠款(元)</th>
-						<td><input name='arrears' id='arrears' required='required' data-options="min:0,precision:2"
+						<th>单位</th>
+						<td><input name='unit' id='unit' type="text"
+							required='required' class="easyui-textbox easyui-validatebox" />
+						</td>
+					</tr>
+					<tr>
+						<th>数量</th>
+						<td><input name='amount' id='amount' required='required' data-options="min:0,precision:0"
 							class='easyui-numberbox' type='number' />
+						</td>
+					</tr>
+					<tr>
+						<th>单价</th>
+						<td><input name='price' id='price' required='required' data-options="min:0,precision:2"
+							class='easyui-numberbox' type='number' />
+						</td>
+					</tr>
+					<tr>
+						<th>金额</th>
+						<td><input name='total' id='total' required='required' data-options="min:0,precision:2"
+							class='easyui-numberbox' type='number' />
+						</td>
+					</tr>
+					<tr>
+						<th>已付款</th>
+						<td><input name='paid' id='paid' required='required' data-options="min:0,precision:2"
+							class='easyui-numberbox' type='number' />
+						</td>
+					</tr>
+					<tr>
+						<th>付款方式</th>
+						<td><input name='payment' id='payment' type="text"
+							required='required' class="easyui-textbox easyui-validatebox" />
 						</td>
 					</tr>
 				</table>

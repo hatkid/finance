@@ -88,6 +88,9 @@
 			idField : 'id',
 			singleSelect : true,
 			columns : [ [{
+				field : 'companyId',
+				hiddle : true
+			},{
 				field : 'companyName',
 				title : '公司名称',
 				align : 'left',
@@ -145,12 +148,11 @@
 			toolbar :  "#tb"
 		});
 		$("#search").click(function() {
-			var queryParams = $("#dg").datagrid("options").queryParams;
-			queryParams["companyId"] = $('#companyName').combobox('getValue');
-			queryParams["createTimeStart"] = $('#createTimeStart').datetimebox('getValue');
-			queryParams["createTimeEnd"] = $('#createTimeEnd').datetimebox('getValue');
-			$("#dg").datagrid("options").queryParams = queryParams;
-			$('#dg').datagrid('load');
+			$('#dg').datagrid('load',{
+				companyId : $('#companyName').combobox('getValue'),
+				createTimeStart : $('#createTimeStart').datetimebox('getValue'),
+				createTimeEnd : $('#createTimeEnd').datetimebox('getValue')
+			});
 		});
 		$("#searchClean").click(function() {
 			$('#companyName').combobox('setValue', ''); 
@@ -160,8 +162,8 @@
 		$("#add").click(function() {
 			$.modalDialog({
 				title : "添加数据",
-				width : 300,
-				height : 300,
+				width : 500,
+				height : 500,
 				href : "manage/supplierDetail/editDlg",
 				buttons : [ {
 					text : '保存',
@@ -169,6 +171,7 @@
 					handler : function() {
 						$.modalDialog.openner = $grid;
 						var f = $.modalDialog.handler.find("#form");
+						console.log(f);
 						f.submit();
 					}
 				}, {
@@ -184,11 +187,12 @@
 
 		$("#update").click(function() {
 			var row = $dg.datagrid('getSelected');
+			console.log(row);
 			if (row) {
 				$.modalDialog({
 					title : "编辑数据",
-					width : 300,
-					height : 300,
+					width : 500,
+					height : 500,
 					href : "manage/supplierDetail/editDlg",
 					onLoad : function() {
 						var f = $.modalDialog.handler.find("#form");

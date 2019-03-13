@@ -16,10 +16,10 @@ public class CommonEntity implements Serializable {
 	private static final long serialVersionUID = 4431397413864840169L;
 
 	// 创建者
-	private int row_creater;
+	private Integer row_creater;
 
 	// 编辑者
-	private int row_modifier;
+	private Integer row_modifier;
 
 	// 创建时间
 	private String row_create_time;
@@ -28,40 +28,42 @@ public class CommonEntity implements Serializable {
 	private String row_modify_time;
 
 	// 行状态
-	private int row_state;
+	private Integer row_state;
 	
 	// 页码
-	private int page;
+	private Integer page;
 	
 	// 每页数据
-	private int rows;
+	private Integer rows;
 
 	public CommonEntity() {
 	}
 
-	public CommonEntity(int row_creater, int row_modifier, String row_create_time, String row_modify_time,
-			int row_state) {
+	public CommonEntity(Integer row_creater, Integer row_modifier, String row_create_time, String row_modify_time,
+			Integer row_state, Integer page, Integer rows) {
 		super();
 		this.row_creater = row_creater;
 		this.row_modifier = row_modifier;
 		this.row_create_time = row_create_time;
 		this.row_modify_time = row_modify_time;
 		this.row_state = row_state;
+		this.page = page;
+		this.rows = rows;
 	}
 
-	public double getRow_creater() {
+	public Integer getRow_creater() {
 		return row_creater;
 	}
 
-	public void setRow_creater(int row_creater) {
+	public void setRow_creater(Integer row_creater) {
 		this.row_creater = row_creater;
 	}
 
-	public double getRow_modifier() {
+	public Integer getRow_modifier() {
 		return row_modifier;
 	}
 
-	public void setRow_modifier(int row_modifier) {
+	public void setRow_modifier(Integer row_modifier) {
 		this.row_modifier = row_modifier;
 	}
 
@@ -81,31 +83,29 @@ public class CommonEntity implements Serializable {
 		this.row_modify_time = row_modify_time;
 	}
 
-	public int getRow_state() {
+	public Integer getRow_state() {
 		return row_state;
 	}
 
-	public void setRow_state(int row_state) {
+	public void setRow_state(Integer row_state) {
 		this.row_state = row_state;
 	}
 
-	public int getPage() {
+	public Integer getPage() {
 		return page;
 	}
 
-	public void setPage(int page) {
+	public void setPage(Integer page) {
 		this.page = page;
 	}
 
-	public int getRows() {
+	public Integer getRows() {
 		return rows;
 	}
 
-	public void setRows(int rows) {
+	public void setRows(Integer rows) {
 		this.rows = rows;
 	}
-	
-	
-	
 
+	
 }
