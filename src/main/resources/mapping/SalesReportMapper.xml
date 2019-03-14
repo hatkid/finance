@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finance.dao.SalesReportMapper">
+	<insert id="insert" parameterType="SupplierDetail"
+		flushCache="true" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		salesreport(customerName,teaName,color,setCount,saleCount,totalCount,price,totalPrice,subtotal,remark,row_creater,row_modifier,row_create_time,row_modify_time)
+		VALUES(#{customerName,jdbcType=VARCHAR},#{teaName,jdbcType=VARCHAR},
+		#{color,jdbcType=VARCHAR},#{setCount,jdbcType=INTEGER},#{saleCount,jdbcType=INTEGER},
+		#{totalCount,jdbcType=INTEGER},#{price,jdbcType=DOUBLE},#{totalPrice,jdbcType=DOUBLE},
+		#{subtotal,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{row_creater,jdbcType=VARCHAR},
+		#{row_modifier,jdbcType=INTEGER},str_to_date(#{row_create_time},'%Y-%m-%d %H:%i:%s'),str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s'))
+	</insert>
+	
+	<update id="update" parameterType="SupplierDetail">
+		UPDATE salesreport SET
+		customerName = #{customerName},
+		teaName = #{teaName},
+		color = #{color},
+		setCount = #{setCount},
+		saleCount = #{saleCount},
+		totalCount = #{totalCount},
+		price = #{price},
+		totalPrice = #{totalPrice},
+		subtotal = #{subtotal},
+		remark = #{remark},
+		row_modifier = #{row_modifier,jdbcType=INTEGER},
+		row_modify_time = str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s')
+		WHERE id=#{id,jdbcType=INTEGER}
+	</update>
+	
+	<update id="delete" parameterType="SupplierDetail">
+		UPDATE salesreport SET
+		row_state = 0,
+		row_modifier = #{row_modifier,jdbcType=INTEGER},
+		row_modify_time = str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s')
+		WHERE id=#{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="searchByPage" resultType="SalesReport">
+		select sr.id, sr.customerName, sr.teaName, sr.color, sr.setCount, sr.saleCount, sr.totalCount, sr.price, sr.totalPrice,sr.subtotal,sr.remark, 
+		date_format(sr.row_create_time, '%Y-%m-%d %H:%i:%s') createTime from salesreport sr
+		where sr.row_state = 1 
+		<if test="customerName != null and customerName != ''">
+			 and sr.customerName like concat('%', #{customerName, jdbcType=VARCHAR}, '%') 
+		</if>
+		<if test="createTimeStart != null and createTimeStart != ''">
+			 and sr.row_create_time &gt;= str_to_date(#{createTimeStart},'%Y-%m-%d %H:%i:%s')
+		</if>
+		<if test="createTimeEnd != null and createTimeEnd != ''">
+			 and sr.row_create_time &lt;= str_to_date(#{createTimeEnd},'%Y-%m-%d %H:%i:%s')
+		</if>
+		order by sr.row_create_time desc
+	</select>
+	
+</mapper>

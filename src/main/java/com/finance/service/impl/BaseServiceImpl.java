@@ -23,6 +23,7 @@ import com.finance.dao.PermissionMapper;
 import com.finance.dao.PersonMapper;
 import com.finance.dao.RoleMapper;
 import com.finance.dao.RolePermissionMapper;
+import com.finance.dao.SalesReportMapper;
 import com.finance.dao.ServiceLogisticsMapper;
 import com.finance.dao.StorageLogisticsMapper;
 import com.finance.dao.SupplierDetailMapper;
@@ -82,6 +83,8 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	protected CompanyFinanceMapper companyFinanceMapper;
 	@Autowired
 	protected SupplierDetailMapper supplierDetailMapper;
+	@Autowired
+	protected SalesReportMapper salesReportMapper;
 
 	@SuppressWarnings("rawtypes")
 	private Class clazz = null;
