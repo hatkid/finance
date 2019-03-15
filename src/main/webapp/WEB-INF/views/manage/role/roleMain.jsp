@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 idField: 'id',
                 treeField: 'name',
                 singleSelect: false,
-                deepCascadeCheck: true,
+               // deepCascadeCheck: true,
                 columns: [[
                     {field: 'ck', checkbox: true},
                     {field: 'name', title: '菜单名称', width: parseInt($(this).width() * 0.15)},
@@ -141,10 +141,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         }
                     }, {field: 'description', title: '菜单描述', width: parseInt($(this).width() * 0.18), align: 'left'}
                 ]], toolbar: '#tb', onClickRow: function (row) {
-                    $function.treegrid('cascadeCheck', {
-                        id: row.id,
-                        deepCascade: true //深度级联
-                    });
+                   // $function.treegrid('cascadeCheck', {
+                  //      id: row.id,
+                   //     deepCascade: true //深度级联
+                  //  });
                 }
             });
 
