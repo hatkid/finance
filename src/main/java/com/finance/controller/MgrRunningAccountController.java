@@ -1,9 +1,12 @@
 package com.finance.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +28,7 @@ import com.finance.service.SalesReportService;
 import com.finance.service.SupplierDetailService;
 import com.finance.utils.Constants;
 import com.finance.utils.EntityUtil;
+import com.finance.utils.ExportExcel;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
@@ -82,6 +86,42 @@ public class MgrRunningAccountController extends BaseController {
 			json.setMessage(Constants.POST_DATA_FAIL + Constants.IS_EXT_SUBMENU);
 		}
 		return JSONArray.toJSONString(json);
+	}
+	
+	@RequestMapping("/download")
+	public void download(RunningAccount runningAccount,HttpServletResponse response) throws Exception{
+		
+		String sheetName = "流水表";
+		List<String> titleName = new ArrayList<>();
+		titleName.add("日期");
+		titleName.add("费用属性");
+		titleName.add("属性类别");
+		titleName.add("单位名称");
+		titleName.add("项目");
+		titleName.add("摘要");
+		titleName.add("入账(借)");
+		titleName.add("出账(贷)");
+		titleName.add("支付方式");
+		titleName.add("收款人");
+		titleName.add("备注");
+		
+		List<String> keyList = new ArrayList<>();
+		
+		keyList.add("createTime");
+		keyList.add("costAttribute");
+		keyList.add("costAttributeType");
+		keyList.add("companyName");
+		keyList.add("projectName");
+		keyList.add("abstractContent");
+		keyList.add("entrys");
+		keyList.add("outs");
+		keyList.add("payment");
+		keyList.add("payee");
+		keyList.add("remark");
+		
+		@SuppressWarnings("unchecked")
+		List<RunningAccount> list = runningAccountService.searchByPage(runningAccount);
+		ExportExcel.createExcel(sheetName, list, titleName, keyList, response);
 	}
 
 }

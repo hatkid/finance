@@ -15,12 +15,12 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 public class ExportExcel {
 
-	public static void createExcel(List<Map<String, Object>> list, List<String> titleName, List<String> keyList,
+	public static void createExcel(List list, List<String> titleName, List<String> keyList,
 			HttpServletResponse response) {
 		createExcel("sheet", list, titleName, keyList, response);
 	}
 
-	public static void createExcel(String sheetName, List<Map<String, Object>> list, List<String> titleName,
+	public static void createExcel(String sheetName, List list, List<String> titleName,
 			List<String> keyList, HttpServletResponse response) {
 		try {
 			response.setContentType("APPLICATION/OCTET-STREAM");
@@ -48,9 +48,11 @@ public class ExportExcel {
 				// 第五步，写入实体数据 实际应用中这些数据从数据库得到，
 				for (int valueIndex = 0; valueIndex < list.size(); valueIndex++) {
 					row = sheet.createRow(valueIndex + 1);
+					Object obj = null;
 					Map<String, Object> map = null;
 					try {
-						map = list.get(valueIndex);
+						obj = list.get(valueIndex);
+						map = EntityUtil.object2Map(obj);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
