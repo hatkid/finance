@@ -323,16 +323,12 @@
 					id="searchClean" class="mysearch" style="display: inline;"><img
 					src="resources/core/images/refresh.png" height="24px" width="24px"
 					style="vertical-align:middle; margin: 5px;padding:5px;" /> 重置</span>
-			<span
-					id="export" class="mysearch" style="display: inline;"><img
-					src="resources/core/images/excel.png" height="24px" width="24px"
-					style="vertical-align:middle; margin: 5px;padding:5px;" /> 导出</span>
-			<%-- <shiro:hasPermission name="mgrRunningAccountDownload"> --%>
-			<!-- <span id="export" class="mystyle"  style="display: inline;"><img
-						src="resources/core/images/excel.png"
-						style="vertical-align:middle; margin-left: 5px;padding-left:5px;" />
-						导出Excel</span> -->
-				<%-- </shiro:hasPermission> --%>
+		    <shiro:hasPermission name="mgrRunningAccountDownload">
+				<span
+						id="export" class="mysearch" style="display: inline;"><img
+						src="resources/core/images/excel.png" height="24px" width="24px"
+						style="vertical-align:middle; margin: 5px;padding:5px;" /> 导出</span>
+			</shiro:hasPermission>
 			<div style="display:none;">
 				<form action="manage/runningAccount/download" method="get"
 					id="download">
