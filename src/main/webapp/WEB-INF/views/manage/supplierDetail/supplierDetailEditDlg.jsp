@@ -106,7 +106,7 @@ table,th,td {
 					<tr>
 						<th>供应商名称</th>
 						<td>
-							<input class="easyui-combobox" name="companyId" id="companyId"
+							<input class="easyui-combobox" name="companyId" id="companyId" editable=false
 								data-options="
 									url: 'manage/supplierDetail/getCompanyName',
 									valueField:'id',

@@ -287,7 +287,7 @@
 				</span>
 			</div>
 			<span style="margin-left: 5px;display:inline;"> 公司名称:
-				<input class="easyui-combobox" name="language" id="companyName"
+				<input class="easyui-combobox" name="language" id="companyName" editable=false
 				data-options="
 					url: 'manage/supplierDetail/getCompanyName',
 					valueField:'id',
