@@ -104,6 +104,12 @@ table,th,td {
 				<input name="id" id="id" type="hidden" />
 				<table>
 					<tr>
+						<th>日期</th>
+						<td>
+							<input id="timedate"  name="timedate" class="easyui-datebox" required='required'/>
+						</td>
+					</tr>
+					<tr>
 						<th>费用属性</th>
 						<td><input name='costAttribute' id='costAttribute' type="text"
 							required='required' class="easyui-textbox easyui-validatebox" />

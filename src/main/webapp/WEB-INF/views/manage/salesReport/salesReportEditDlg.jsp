@@ -104,6 +104,12 @@ table,th,td {
 				<input name="id" id="id" type="hidden" />
 				<table>
 					<tr>
+						<th>日期</th>
+						<td>
+							<input id="timedate"  name="timedate" class="easyui-datebox" required='required'/>
+						</td>
+					</tr>
+					<tr>
 						<th>客户名称</th>
 						<td><input name='customerName' id='customerName' type="text"
 							required='required' class="easyui-textbox easyui-validatebox" />

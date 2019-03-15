@@ -5,14 +5,14 @@
 	<insert id="insert" parameterType="SalesReport"
 		flushCache="true" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
-		salesreport(customerName,teaName,color,setCount,saleCount,totalCount,price,totalPrice,subtotal,remark,row_creater,row_modifier,row_create_time,row_modify_time)
+		salesreport(customerName,teaName,color,setCount,saleCount,totalCount,price,totalPrice,subtotal,remark,row_creater,row_modifier,row_create_time,row_modify_time,timedate)
 		VALUES(#{customerName,jdbcType=VARCHAR},#{teaName,jdbcType=VARCHAR},
 		#{color,jdbcType=VARCHAR},#{setCount,jdbcType=INTEGER},#{saleCount,jdbcType=INTEGER},
 		#{totalCount,jdbcType=INTEGER},#{price,jdbcType=DOUBLE},#{totalPrice,jdbcType=DOUBLE},
 		#{subtotal,jdbcType=VARCHAR},
 		#{remark,jdbcType=VARCHAR},
 		#{row_creater,jdbcType=VARCHAR},
-		#{row_modifier,jdbcType=INTEGER},str_to_date(#{row_create_time},'%Y-%m-%d %H:%i:%s'),str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s'))
+		#{row_modifier,jdbcType=INTEGER},str_to_date(#{row_create_time},'%Y-%m-%d %H:%i:%s'),str_to_date(#{row_modify_time},'%Y-%m-%d %H:%i:%s'),str_to_date(#{timedate},'%Y-%m-%d %H:%i:%s'))
 	</insert>
 	
 	<update id="update" parameterType="SalesReport">
@@ -24,6 +24,7 @@
 		saleCount = #{saleCount},
 		totalCount = #{totalCount},
 		price = #{price},
+		timedate = str_to_date(#{timedate},'%Y-%m-%d %H:%i:%s'),
 		totalPrice = #{totalPrice},
 		subtotal = #{subtotal},
 		remark = #{remark},
@@ -42,18 +43,18 @@
 
 	<select id="searchByPage" resultType="SalesReport">
 		select sr.id, sr.customerName, sr.teaName, sr.color, sr.setCount, sr.saleCount, sr.totalCount, sr.price, sr.totalPrice,sr.subtotal,sr.remark, 
-		date_format(sr.row_create_time, '%Y-%m-%d %H:%i:%s') createTime from salesreport sr
+		date_format(sr.timedate, '%Y-%m-%d %H:%i:%s') createTime from salesreport sr
 		where sr.row_state = 1 
 		<if test="customerName != null and customerName != ''">
 			 and sr.customerName like concat('%', #{customerName, jdbcType=VARCHAR}, '%') 
 		</if>
 		<if test="createTimeStart != null and createTimeStart != ''">
-			 and sr.row_create_time &gt;= str_to_date(#{createTimeStart},'%Y-%m-%d %H:%i:%s')
+			 and sr.timedate &gt;= str_to_date(#{createTimeStart},'%Y-%m-%d %H:%i:%s')
 		</if>
 		<if test="createTimeEnd != null and createTimeEnd != ''">
-			 and sr.row_create_time &lt;= str_to_date(#{createTimeEnd},'%Y-%m-%d %H:%i:%s')
+			 and sr.timedate &lt;= str_to_date(#{createTimeEnd},'%Y-%m-%d %H:%i:%s')
 		</if>
-		order by sr.row_create_time desc
+		order by sr.timedate desc
 	</select>
 	
 </mapper>

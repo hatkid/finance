@@ -294,7 +294,7 @@
 					textField:'companyName'
 				">
 			</span> 
-			<span style="margin-left: 5px;display:inline;"> 创建时间: 
+			<span style="margin-left: 5px;display:inline;"> 日期: 
 				<input id="createTimeStart" class="easyui-datebox" />
 			</span> 
 			至
