@@ -1,9 +1,11 @@
 package com.finance.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
+import com.finance.entity.RunningAccount;
 import com.finance.entity.SalesReport;
 import com.finance.entity.SupplierDetail;
 import com.finance.model.GridModel;
@@ -23,6 +26,7 @@ import com.finance.service.SalesReportService;
 import com.finance.service.SupplierDetailService;
 import com.finance.utils.Constants;
 import com.finance.utils.EntityUtil;
+import com.finance.utils.ExportExcel;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
@@ -80,6 +84,42 @@ public class MgrSalesReportController extends BaseController {
 			json.setMessage(Constants.POST_DATA_FAIL + Constants.IS_EXT_SUBMENU);
 		}
 		return JSONArray.toJSONString(json);
+	}
+	
+	@RequestMapping("/download")
+	public void download(SalesReport salesReport,HttpServletResponse response) throws Exception{
+		
+		String sheetName = "销售表";
+		List<String> titleName = new ArrayList<>();
+		titleName.add("日期");
+		titleName.add("客户名称");
+		titleName.add("品名");
+		titleName.add("色别");
+		titleName.add("件数 套数");
+		titleName.add("发货件数");
+		titleName.add("合计数量");
+		titleName.add("单价");
+		titleName.add("合计金额");
+		titleName.add("小计");
+		titleName.add("备注");
+		
+		List<String> keyList = new ArrayList<>();
+		
+		keyList.add("createTime");
+		keyList.add("customerName");
+		keyList.add("teaName");
+		keyList.add("color");
+		keyList.add("setCount");
+		keyList.add("saleCount");
+		keyList.add("totalCount");
+		keyList.add("price");
+		keyList.add("totalPrice");
+		keyList.add("subtotal");
+		keyList.add("remark");
+		
+		@SuppressWarnings("unchecked")
+		List<SalesReport> list = salesReportService.searchByPage(salesReport);
+		ExportExcel.createExcel(sheetName, list, titleName, keyList, response);
 	}
 
 }

@@ -89,7 +89,7 @@
 			singleSelect : true,
 			columns : [ [{
 				field : 'companyId',
-				hiddle : true
+				hidden: true
 			},{
 				field : 'companyName',
 				title : '公司名称',
@@ -265,6 +265,16 @@
 				});
 			}
 		});
+		
+		$("#export").click(function() {
+			var companyId = $('#companyName').combobox('getValue');
+			var createTimeStart = $('#createTimeStart').datetimebox('getValue');
+			var createTimeEnd = $('#createTimeEnd').datetimebox('getValue');
+			$("#companyIdDownload").val(companyId);
+			$("#createTimeStartDownload").val(createTimeStart);
+			$("#createTimeEndDownload").val(createTimeEnd);
+			$("#download").submit();
+		});
 	});
 </script>
 </head>
@@ -307,6 +317,23 @@
 					id="searchClean" class="mysearch" style="display: inline;"><img
 					src="resources/core/images/refresh.png" height="24px" width="24px"
 					style="vertical-align:middle; margin: 5px;padding:5px;" /> 重置</span>
+			<shiro:hasPermission name="mgrSupplierDetailDownload">
+				<span
+						id="export" class="mysearch" style="display: inline;"><img
+						src="resources/core/images/excel.png" height="24px" width="24px"
+						style="vertical-align:middle; margin: 5px;padding:5px;" /> 导出</span>
+			</shiro:hasPermission>
+			<div style="display:none;">
+				<form action="manage/supplierDetail/download" method="get"
+					id="download">
+					<input type="hidden" name="companyId"
+						id="companyIdDownload" /> 
+					<input type="hidden"
+						name="createTimeStart" id="createTimeStartDownload" />
+					<input type="hidden"
+						name="createTimeEnd" id="createTimeEndDownload" />
+				</form>
+			</div>
 		<table class="tablelist" id="dg" title="供应商明细信息统计"></table>
 
 		<div class="tip">
