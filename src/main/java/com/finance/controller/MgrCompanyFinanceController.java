@@ -2,10 +2,13 @@ package com.finance.controller;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.weaver.JoinPointSignature;
@@ -18,11 +21,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.finance.entity.CompanyFinance;
+import com.finance.entity.SupplierDetail;
 import com.finance.model.GridModel;
 import com.finance.model.Json;
 import com.finance.service.CompanyFinanceService;
 import com.finance.utils.Constants;
 import com.finance.utils.EntityUtil;
+import com.finance.utils.ExportExcel;
 import com.finance.utils.PageUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -92,5 +97,30 @@ public class MgrCompanyFinanceController extends BaseController {
 		}
 		return JSONArray.toJSONString(json);
 	}
+	
+	@RequestMapping("/download")
+	public void download(CompanyFinance companyFinance,HttpServletResponse response) throws Exception{
+		
+		String sheetName = "采购明细表";
+		List<String> titleName = new ArrayList<>();
+		titleName.add("公司名字");
+		titleName.add("货款金额");
+		titleName.add("年初欠款");
+		titleName.add("已付款");
+		titleName.add("总欠款额");
+		
+		List<String> keyList = new ArrayList<>();
+		
+		keyList.add("companyName");
+		keyList.add("loanAmount");
+		keyList.add("arrears");
+		keyList.add("paid");
+		keyList.add("totalArrears");
+		
+		@SuppressWarnings("unchecked")
+		List<CompanyFinance> list = companyFinanceService.searchByPage(companyFinance);
+		ExportExcel.createExcel(sheetName, list, titleName, keyList, response);
+	}
+
 
 }

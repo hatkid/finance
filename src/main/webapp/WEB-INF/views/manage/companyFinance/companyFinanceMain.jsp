@@ -232,6 +232,12 @@
 				});
 			}
 		});
+		
+		$("#export").click(function() {
+			var companyName = $('#companyName').val();
+			$("#companyNameDownload").val(companyName);
+			$("#download").submit();
+		});
 	});
 </script>
 </head>
@@ -263,7 +269,19 @@
 					id="searchClean" class="mysearch" style="display: inline;"><img
 					src="resources/core/images/refresh.png" height="24px" width="24px"
 					style="vertical-align:middle; margin: 5px;padding:5px;" /> 重置</span>
-			</span>
+			<shiro:hasPermission name="companyExportFinance">
+				<span
+						id="export" class="mysearch" style="display: inline;"><img
+						src="resources/core/images/excel.png" height="24px" width="24px"
+						style="vertical-align:middle; margin: 5px;padding:5px;" /> 导出</span>
+			</shiro:hasPermission>
+			<div style="display:none;">
+				<form action="manage/companyFinance/download" method="get"
+					id="download">
+					<input type="hidden" name="companyName"
+						id="companyNameDownload" />
+				</form>
+			</div>
 		<table class="tablelist" id="dg" title="供应商欠款信息统计"></table>
 
 		<div class="tip">
