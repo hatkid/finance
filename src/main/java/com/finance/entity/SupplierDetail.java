@@ -41,6 +41,9 @@ public class SupplierDetail extends CommonEntity implements java.io.Serializable
 	// 公司id
 	private Integer companyId;
 	
+	// 时间
+	private String timedate;
+	
 	
 	
 	public SupplierDetail() {
@@ -224,6 +227,19 @@ public class SupplierDetail extends CommonEntity implements java.io.Serializable
 		this.companyId = companyId;
 	}
 
+
+
+	public String getTimedate() {
+		return timedate;
+	}
+
+
+
+	public void setTimedate(String timedate) {
+		this.timedate = timedate;
+	}
+
+	
 	
 	
 }

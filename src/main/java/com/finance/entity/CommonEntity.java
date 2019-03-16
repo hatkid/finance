@@ -26,9 +26,6 @@ public class CommonEntity implements Serializable {
 
 	// 修改时间
 	private String row_modify_time;
-	
-	// 时间
-	private String timedate;
 
 	// 行状态
 	private Integer row_state;
@@ -109,16 +106,4 @@ public class CommonEntity implements Serializable {
 	public void setRows(Integer rows) {
 		this.rows = rows;
 	}
-
-	public String getTimedate() {
-		return timedate;
-	}
-
-	public void setTimedate(String timedate) {
-		this.timedate = timedate;
-	}
-	
-	
-
-	
 }

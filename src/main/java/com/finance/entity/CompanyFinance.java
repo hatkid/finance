@@ -21,6 +21,9 @@ public class CompanyFinance extends CommonEntity implements java.io.Serializable
 	// 总欠款额
 	private double totalArrears;
 	
+	// 时间
+	private String timedate;
+	
 	// 渠道：0-pc；1-小程序
 	private int channel;
 	
@@ -98,6 +101,14 @@ public class CompanyFinance extends CommonEntity implements java.io.Serializable
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getTimedate() {
+		return timedate;
+	}
+
+	public void setTimedate(String timedate) {
+		this.timedate = timedate;
 	}
 
 	

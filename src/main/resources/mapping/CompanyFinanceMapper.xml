@@ -32,10 +32,10 @@
 
 	<select id="searchByPage" resultType="CompanyFinance">
 		select cf.id, cf.companyName, 
-		IFNULL((select SUM(sd.total) from supplierdetail sd where sd.company_finance_id = cf.id),0) loanAmount, 
+		IFNULL((select SUM(sd.total) from supplierdetail sd where sd.company_finance_id = cf.id and sd.row_state = 1),0) loanAmount, 
 		cf.arrears, 
-		IFNULL((select SUM(sd.paid) from supplierdetail sd where sd.company_finance_id = cf.id),0) paid, 
-		(IFNULL((select SUM(sd.total) from supplierdetail sd where sd.company_finance_id = cf.id),0) + cf.arrears -IFNULL((select SUM(sd.paid) from supplierdetail sd where sd.company_finance_id = cf.id),0)   ) totalArrears 
+		IFNULL((select SUM(sd.paid) from supplierdetail sd where sd.company_finance_id = cf.id and sd.row_state = 1),0) paid, 
+		(IFNULL((select SUM(sd.total) from supplierdetail sd where sd.company_finance_id = cf.id and sd.row_state = 1),0) + cf.arrears -IFNULL((select SUM(sd.paid) from supplierdetail sd where sd.company_finance_id = cf.id and sd.row_state = 1),0)   ) totalArrears 
 		 from companyfinance cf
 		where cf.row_state = 1
 		<if test="companyName != null and companyName!=''">

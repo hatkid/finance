@@ -39,7 +39,7 @@
 
 	<select id="searchByPage" resultType="SupplierDetail">
 		select sd.id id, sd.purchase_name purchaseName, sd.unit, sd.amount, sd.price, sd.total, 
-		sd.paid, sd.payment, date_format(sd.timedate, '%Y-%m-%d %H:%i:%s') timedate, cf.companyName, cf.id companyId from supplierdetail sd, companyfinance cf 
+		sd.paid, sd.payment, date_format(sd.timedate, '%Y-%m-%d') timedate, cf.companyName, cf.id companyId from supplierdetail sd, companyfinance cf 
 		where cf.id = sd.company_finance_id and sd.row_state = 1 
 		<if test="companyId != null and companyId!=''">
 			 and sd.company_finance_id = #{companyId,jdbcType=INTEGER}

@@ -108,7 +108,7 @@ public class MgrSupplierDetailController extends BaseController {
 		
 		List<String> keyList = new ArrayList<>();
 		
-		keyList.add("createTime");
+		keyList.add("timedate");
 		keyList.add("companyName");
 		keyList.add("purchaseName");
 		keyList.add("unit");

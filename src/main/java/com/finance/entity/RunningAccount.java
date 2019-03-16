@@ -44,6 +44,9 @@ public class RunningAccount extends CommonEntity implements java.io.Serializable
 	
 	// 创建时间end
 	private String createTimeEnd;
+
+	// 时间
+	private String timedate;
 	
 	
 	public RunningAccount() {
@@ -210,6 +213,17 @@ public class RunningAccount extends CommonEntity implements java.io.Serializable
 	public void setCreateTimeEnd(String createTimeEnd) {
 		this.createTimeEnd = createTimeEnd;
 	}
+
+
+	public String getTimedate() {
+		return timedate;
+	}
+
+
+	public void setTimedate(String timedate) {
+		this.timedate = timedate;
+	}
+	
 	
 	
 }

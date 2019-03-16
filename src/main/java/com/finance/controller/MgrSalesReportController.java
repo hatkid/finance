@@ -105,7 +105,7 @@ public class MgrSalesReportController extends BaseController {
 		
 		List<String> keyList = new ArrayList<>();
 		
-		keyList.add("createTime");
+		keyList.add("timedate");
 		keyList.add("customerName");
 		keyList.add("teaName");
 		keyList.add("color");
