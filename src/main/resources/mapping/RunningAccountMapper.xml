@@ -43,7 +43,7 @@
 
 	<select id="searchByPage" resultType="RunningAccount">
 		select ra.id, ra.costAttribute, ra.costAttributeType, ra.companyName, ra.projectName, ra.abstractContent, ra.entrys, ra.outs, ra.payment,ra.payee,ra.remark, 
-		date_format(ra.timedate, '%Y-%m-%d %H:%i:%s') createTime from RunningAccount ra
+		date_format(ra.timedate, '%Y-%m-%d %H:%i:%s') timedate from RunningAccount ra
 		where ra.row_state = 1 
 		<if test="companyName != null and companyName != ''">
 			 and ra.companyName like concat('%', #{companyName, jdbcType=VARCHAR}, '%') 

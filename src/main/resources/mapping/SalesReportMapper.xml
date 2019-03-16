@@ -43,7 +43,7 @@
 
 	<select id="searchByPage" resultType="SalesReport">
 		select sr.id, sr.customerName, sr.teaName, sr.color, sr.setCount, sr.saleCount, sr.totalCount, sr.price, sr.totalPrice,sr.subtotal,sr.remark, 
-		date_format(sr.timedate, '%Y-%m-%d %H:%i:%s') createTime from salesreport sr
+		date_format(sr.timedate, '%Y-%m-%d %H:%i:%s') timedate from salesreport sr
 		where sr.row_state = 1 
 		<if test="customerName != null and customerName != ''">
 			 and sr.customerName like concat('%', #{customerName, jdbcType=VARCHAR}, '%') 

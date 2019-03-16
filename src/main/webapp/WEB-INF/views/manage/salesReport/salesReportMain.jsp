@@ -88,7 +88,7 @@
 			idField : 'id',
 			singleSelect : true,
 			columns : [ [ {
-				field : 'createTime',
+				field : 'timedate',
 				title : '日期',
 				align : 'left',
 				width : width,
