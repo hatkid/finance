@@ -263,24 +263,8 @@ a:hover {
 						});
 		
 		
-		 $("#pageUp").click(function(){
-		    	pageNow = pageNow - 1; 
-		    	if(pageNow < 1){
-		    		pageNow = pageNow + 1; 
-		    		return;
-		    	}
-		    	 getRequest(pageNow);
-		    });
-		$("#pageDown").click(function(){
-				pageNow = pageNow + 1; 
-		    	if(pageNow > totalPage){
-		    		pageNow = pageNow - 1;
-		    		return;
-		    	}
-		    	 getRequest(pageNow);
-		    });
-		    
-		    getRequest('1');
+		
+		   // getRequest('1');
 	});
 	
 	
@@ -354,8 +338,6 @@ a:hover {
 
 
 </script>
-<script type="text/javascript" src="resources/js/governmentNotice.js"></script>
-<script type="text/javascript" src="resources/js/remind.js"></script>
 <div id="centerTabs">
 	<div iconCls="icon-home" title="首页" border="false"
 		style="overflow: hidden;">

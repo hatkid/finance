@@ -304,7 +304,7 @@
 					</shiro:hasPermission>
 				</span>
 			</div>
-			<span style="margin-left: 5px;display:inline;"> 公司名称:
+			<span style="margin-left: 5px;display:inline;"> 单位名称:
 				<input id='companyName' data-options="validType:'length[1,100]'" name="companyName"
 							 class='easyui-textbox easyui-validatebox'
 							type='text' />

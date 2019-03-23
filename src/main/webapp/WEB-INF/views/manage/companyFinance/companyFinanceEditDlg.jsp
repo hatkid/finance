@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<script type="text/javascript" src="resources/js/easyuiextendvalidate.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#form").form({
@@ -112,8 +113,8 @@ table,th,td {
 					</tr>
 					<tr>
 						<th>年初欠款(元)</th>
-						<td><input name='arrears' id='arrears' required='required' data-options="min:0,precision:2"
-							class='easyui-numberbox' type='number' />
+						<td><input name='arrears' id='arrears' data-options="validType:'isMyNumber'"
+							class='easyui-textbox easyui-validatebox' type='text' />
 						</td>
 					</tr>
 				</table>

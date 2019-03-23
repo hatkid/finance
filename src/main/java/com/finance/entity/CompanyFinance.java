@@ -10,29 +10,29 @@ public class CompanyFinance extends CommonEntity implements java.io.Serializable
 	private String companyName;
 	
 	// 货款金额
-	private double loanAmount;
+	private Double loanAmount;
 	
 	// 年初欠款
-	private double arrears;
+	private Double arrears;
 	
 	// 已付款
-	private double paid;
+	private Double paid;
 	
 	// 总欠款额
-	private double totalArrears;
+	private Double totalArrears;
 	
 	// 时间
 	private String timedate;
 	
 	// 渠道：0-pc；1-小程序
-	private int channel;
-	
+	private Integer channel;
+
 	public CompanyFinance() {
 		
 	}
-
-	public CompanyFinance(Integer id, String companyName, double loanAmount, double arrears, double paid,
-			double totalArrears, int channel) {
+	
+	public CompanyFinance(Integer id, String companyName, Double loanAmount, Double arrears, Double paid,
+			Double totalArrears, String timedate, Integer channel) {
 		super();
 		this.id = id;
 		this.companyName = companyName;
@@ -40,6 +40,7 @@ public class CompanyFinance extends CommonEntity implements java.io.Serializable
 		this.arrears = arrears;
 		this.paid = paid;
 		this.totalArrears = totalArrears;
+		this.timedate = timedate;
 		this.channel = channel;
 	}
 
@@ -59,48 +60,36 @@ public class CompanyFinance extends CommonEntity implements java.io.Serializable
 		this.companyName = companyName;
 	}
 
-	public double getLoanAmount() {
+	public Double getLoanAmount() {
 		return loanAmount;
 	}
 
-	public void setLoanAmount(double loanAmount) {
+	public void setLoanAmount(Double loanAmount) {
 		this.loanAmount = loanAmount;
 	}
 
-	public double getArrears() {
+	public Double getArrears() {
 		return arrears;
 	}
 
-	public void setArrears(double arrears) {
+	public void setArrears(Double arrears) {
 		this.arrears = arrears;
 	}
 
-	public double getPaid() {
+	public Double getPaid() {
 		return paid;
 	}
 
-	public void setPaid(double paid) {
+	public void setPaid(Double paid) {
 		this.paid = paid;
 	}
 
-	public double getTotalArrears() {
+	public Double getTotalArrears() {
 		return totalArrears;
 	}
 
-	public void setTotalArrears(double totalArrears) {
+	public void setTotalArrears(Double totalArrears) {
 		this.totalArrears = totalArrears;
-	}
-
-	public int getChannel() {
-		return channel;
-	}
-
-	public void setChannel(int channel) {
-		this.channel = channel;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	public String getTimedate() {
@@ -111,9 +100,12 @@ public class CompanyFinance extends CommonEntity implements java.io.Serializable
 		this.timedate = timedate;
 	}
 
-	
-	
-	
-	
+	public Integer getChannel() {
+		return channel;
+	}
 
+	public void setChannel(Integer channel) {
+		this.channel = channel;
+	}
+	
 }

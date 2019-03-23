@@ -46,7 +46,7 @@
 	</select>
 
 	<select id="getCountByCompanyName" resultType="int">
-		select count(*) from companyfinance c where c.companyname = #{companyName,jdbcType=VARCHAR}
+		select count(*) from companyfinance c where c.companyname = #{companyName,jdbcType=VARCHAR} and c.row_state = 1 
 		<if test="id != null and id != ''">
 			and c.id != #{id,jdbcType=INTEGER}
 		</if>
