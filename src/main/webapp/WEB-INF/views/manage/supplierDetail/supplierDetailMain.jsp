@@ -91,6 +91,12 @@
 				field : 'companyId',
 				hidden: true
 			},{
+				field : 'timedate',
+				title : '日期',
+				align : 'left',
+				width : width,
+				editor : 'text'
+			}, {
 				field : 'companyName',
 				title : '公司名称',
 				align : 'left',
@@ -135,12 +141,6 @@
 			}, {
 				field : 'payment',
 				title : '付款方式',
-				align : 'left',
-				width : width,
-				editor : 'text'
-			}, {
-				field : 'timedate',
-				title : '日期',
 				align : 'left',
 				width : width,
 				editor : 'text'
