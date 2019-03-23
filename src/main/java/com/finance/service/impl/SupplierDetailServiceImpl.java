@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.finance.entity.SupplierDetail;
-import com.finance.service.ForwarderLogisticsService;
 import com.finance.service.SupplierDetailService;
 import com.finance.utils.StringUtil;
 

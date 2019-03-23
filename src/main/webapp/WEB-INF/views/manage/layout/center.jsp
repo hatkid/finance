@@ -283,44 +283,7 @@ a:hover {
 		    getRequest('1');
 	});
 	
-	//企业内部信息
-	function getRequest(pageNo){
-		$.ajax({
-			url : "manage/transport/info",
-			data : {
-				'pageNo' : pageNo,
-				'pageSize' : pageSize
-			},
-			method : "POST",
-			dataType : "JSON",
-			success : function(rsp) {
-				totalPage = (rsp.total % pageSize == 0 )? (rsp.total / pageSize) : Math.ceil(rsp.total / pageSize);
-				var temp = "";
-				var count = 0;
-				var start = (pageNow - 1) * pageSize;
-				$.each(rsp.rows,function(index,obj){
-					count ++;
-					temp += '<tr class="trnewitem">';
-					temp += '<td class="tdnewitemtitle"><a onclick=\'go("' + obj.id + '","' + obj.title + '")\'>' + obj.title + '</a></td>';
-					temp += '<td class="tdnewdate">' + format(obj.createDate,'yyyy-MM-dd') + '</td>';
-					temp += '</tr>';
-				});
-				if(temp == ''){
-					temp = "暂无信息。";
-					$("#pageDown").hide();
-					$("#pageUp").hide();
-				}
-				$("#ul").html(temp);
-			},
-			error : function() {
-				$.messager.show({
-					title : "提示",
-					msg : "异常稍后再试！",
-					timeout : 1000 * 2
-				});
-			}
-		});
-	}
+	
 	function addTab(node) {
 		var nodes = node.split("||");
 		if (centerTabs.tabs('exists', nodes[0])) {
@@ -388,37 +351,8 @@ a:hover {
 	}
 	
 	
-	var format = function(time, format){
-	    var t = new Date(time);
-	    var tf = function(i){return (i < 10 ? '0' : '') + i};
-	    return format.replace(/yyyy|MM|dd|HH|mm|ss/g, function(a){
-	        switch(a){
-	            case 'yyyy':
-	                return tf(t.getFullYear());
-	                break;
-	            case 'MM':
-	                return tf(t.getMonth() + 1);
-	                break;
-	            case 'mm':
-	                return tf(t.getMinutes());
-	                break;
-	            case 'dd':
-	                return tf(t.getDate());
-	                break;
-	            case 'HH':
-	                return tf(t.getHours());
-	                break;
-	            case 'ss':
-	                return tf(t.getSeconds());
-	                break;
-	        }
-	    })
-	}
-	
-	function go(id, title){
-		var content = title + '||icon-company||manage/transport/detailMain?id=' + id;
-		addTab(content);
-	}
+
+
 </script>
 <script type="text/javascript" src="resources/js/governmentNotice.js"></script>
 <script type="text/javascript" src="resources/js/remind.js"></script>
@@ -433,56 +367,6 @@ a:hover {
 			</div>
 			<div class="xline"></div>
 			<div class="box"></div>
-			<!-- <div class="welinfo">
-				<span><img src="resources/core/images/dp.png" alt="提醒" /> </span> <b>企业发布信息</b>
-			</div> -->
-
-
-
-
-
-           <div  style="width:1200px;height:290px;">
-           		<div style="width:600px;height:290px;background: ;float:left;">
-	           			<div class="welinfo">
-							<span><img src="resources/core/images/dp.png" alt="提醒" /> </span> <b>企业发布信息</b>
-						</div>
-		           		<div id="ul">
-							
-						</div>
-						<div id="pageGro" class="cb" style="margin-left: 360px;">
-							<div class="pageUp" id="pageUp">上一页</div>
-						    <div class="pageDown" id="pageDown">下一页</div>
-						</div>
-           		</div>
-           		<div style="width:600px;height:290px;/* background: yellow; */float: right;">
-           				<div class="welinfo">
-							<span><img src="resources/core/images/dp.png" alt="提醒" /> </span> <b>政府部门发布信息</b>
-						</div>
-		           		<div id="ulGov">
-							
-						</div>
-						<div id="pageGro" class="cb" style="margin-left: 360px;">
-							<div class="pageUp" id="pageUpGov">上一页</div>
-						    <div class="pageDown" id="pageDownGov">下一页</div>
-						</div>
-           		</div>
-           </div>
-           
-           <div style="width:1200px;height:290px;">
-           		<div style="width:50%;height:290px;/* background: purple; */float:left;">
-           				<div class="welinfo">
-							<span><img src="resources/core/images/dp.png" alt="提醒" /> </span> <b>超时信息提醒</b>
-						</div>
-						<br/>
-						<div id="overTime" style="color: #666666;padding-left:30px;"></div>
-						<br/>
-						<br/>
-						<div id="overTimePre" style="color: #666666;padding-left:30px;">&nbsp;</div>
-           		
-           		</div>
-           		<div style="width:50%;height:290px;float: right;"></div>
-           </div>
-
 
 
 

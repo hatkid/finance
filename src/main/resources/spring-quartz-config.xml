@@ -4,126 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<!-- Quartz定时任务 开始 -->
-	<bean id="serviceLogistics"
-		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass">
-			<value>com.finance.task.ServiceLogisticsTask</value>
-		</property>
-	</bean>
-	<bean id="serviceLogisticsCronTrigger"
-		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-		<property name="jobDetail">
-			<ref bean="serviceLogistics" />
-		</property>
-		<property name="startDelay" value="1000" />
-		<property name="repeatInterval" value="3600000" />
-	</bean>
-	
-	<bean id="coldchainLogistics"
-		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass">
-			<value>com.finance.task.ColdchainLogisticsTask</value>
-		</property>
-	</bean>
-	<bean id="coldchainLogisticsCronTrigger"
-		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-		<property name="jobDetail">
-			<ref bean="coldchainLogistics" />
-		</property>
-		<property name="startDelay" value="1000" />
-		<property name="repeatInterval" value="3600000" />
-	</bean>
-	
-	<bean id="forwarderLogistics"
-		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass">
-			<value>com.finance.task.ForwarderLogisticsTask</value>
-		</property>
-	</bean>
-	<bean id="forwarderLogisticsCronTrigger"
-		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-		<property name="jobDetail">
-			<ref bean="forwarderLogistics" />
-		</property>
-		<property name="startDelay" value="1000" />
-		<property name="repeatInterval" value="3600000" />
-	</bean>
-	
-	<bean id="gardenLogistics"
-		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass">
-			<value>com.finance.task.GardenLogisticsTask</value>
-		</property>
-	</bean>
-	<bean id="gardenLogisticsCronTrigger"
-		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-		<property name="jobDetail">
-			<ref bean="gardenLogistics" />
-		</property>
-		<property name="startDelay" value="1000" />
-		<property name="repeatInterval" value="3600000" />
-	</bean>
-	
-	<bean id="manufacturingLogistics"
-		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass">
-			<value>com.finance.task.ManufacturingLogisticsTask</value>
-		</property>
-	</bean>
-	<bean id="manufacturingLogisticsCronTrigger"
-		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-		<property name="jobDetail">
-			<ref bean="manufacturingLogistics" />
-		</property>
-		<property name="startDelay" value="1000" />
-		<property name="repeatInterval" value="3600000" />
-	</bean>
-	
-	<bean id="multipleshopLogistics"
-		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass">
-			<value>com.finance.task.MultipleshopLogisticsTask</value>
-		</property>
-	</bean>
-	<bean id="multipleshopLogisticsCronTrigger"
-		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-		<property name="jobDetail">
-			<ref bean="multipleshopLogistics" />
-		</property>
-		<property name="startDelay" value="1000" />
-		<property name="repeatInterval" value="3600000" />
-	</bean>
-	
-	<bean id="storageLogistics"
-		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass">
-			<value>com.finance.task.StorageLogisticsTask</value>
-		</property>
-	</bean>
-	<bean id="storageLogisticsCronTrigger"
-		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-		<property name="jobDetail">
-			<ref bean="storageLogistics" />
-		</property>
-		<property name="startDelay" value="1000" />
-		<property name="repeatInterval" value="3600000" />
-	</bean>
-	
-	<bean id="transportLogistics"
-		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass">
-			<value>com.finance.task.TransportLogisticsTask</value>
-		</property>
-	</bean>
-	<bean id="transportLogisticsCronTrigger"
-		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-		<property name="jobDetail">
-			<ref bean="transportLogistics" />
-		</property>
-		<property name="startDelay" value="1000" />
-		<property name="repeatInterval" value="3600000" />
-	</bean>
-	
 	<bean id="test"
 		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
 		<property name="jobClass">
@@ -140,22 +20,11 @@
 	</bean>
 	
 	
-	
-	
-	
 	<bean id="scheduler"
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
 				<ref bean="testCronTrigger" />
-				<ref bean="serviceLogisticsCronTrigger" />
-				<ref bean="coldchainLogisticsCronTrigger" />
-				<ref bean="forwarderLogisticsCronTrigger" />
-				<ref bean="gardenLogisticsCronTrigger" />
-				<ref bean="manufacturingLogisticsCronTrigger" />
-				<ref bean="multipleshopLogisticsCronTrigger" />
-				<ref bean="storageLogisticsCronTrigger" />
-				<ref bean="transportLogisticsCronTrigger" />
 			</list>
 		</property>
 	</bean>

@@ -10,29 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.finance.dao.BaseMapper;
-import com.finance.dao.BusinessManagementMapper;
-import com.finance.dao.ColdchainLogisticsMapper;
 import com.finance.dao.CompanyFinanceMapper;
-import com.finance.dao.CompanyMapper;
-import com.finance.dao.ForwarderLogisticsMapper;
-import com.finance.dao.GardenLogisticsMapper;
-import com.finance.dao.ManufacturingLogisticsMapper;
-import com.finance.dao.MultipleshopLogisticsMapper;
-import com.finance.dao.NoticeMapper;
 import com.finance.dao.PermissionMapper;
-import com.finance.dao.PersonMapper;
 import com.finance.dao.RoleMapper;
 import com.finance.dao.RolePermissionMapper;
 import com.finance.dao.RunningAccountMapper;
 import com.finance.dao.SalesReportMapper;
-import com.finance.dao.ServiceLogisticsMapper;
-import com.finance.dao.StorageLogisticsMapper;
 import com.finance.dao.SupplierDetailMapper;
-import com.finance.dao.TransportInformationMapper;
-import com.finance.dao.TransportLogisticsMapper;
 import com.finance.dao.UserRoleMapper;
 import com.finance.dao.UsersMapper;
-import com.finance.dao.CarMapper;
 import com.finance.service.BaseService;
 import com.finance.utils.GenericsUtils;
 
@@ -45,39 +31,11 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	@Autowired
 	protected PermissionMapper permissionMapper;
 	@Autowired
-	protected CompanyMapper companyMapper;
-	@Autowired
 	protected RoleMapper roleMapper;
 	@Autowired
 	protected RolePermissionMapper rolePermissionMapper;
 	@Autowired
 	protected UserRoleMapper userRoleMapper;
-	@Autowired
-	protected ServiceLogisticsMapper serviceLogisticsMapper;
-	@Autowired
-	protected ManufacturingLogisticsMapper manufacturingLogisticsMapper;
-	@Autowired
-	protected StorageLogisticsMapper storageLogisticsMapper;
-	@Autowired
-	protected TransportLogisticsMapper transportLogisticsMapper;
-	@Autowired
-	protected ForwarderLogisticsMapper forwarderLogisticsMapper;
-	@Autowired
-	protected GardenLogisticsMapper gardenLogisticsMapper;
-	@Autowired
-	protected ColdchainLogisticsMapper coldchainLogisticsMapper;
-	@Autowired
-	protected MultipleshopLogisticsMapper multipleshopLogisticsMapper;
-	@Autowired
-	protected BusinessManagementMapper businessManagementMapper;
-	@Autowired
-	protected PersonMapper personMapper;
-	@Autowired
-	protected CarMapper carMapper;
-	@Autowired
-	protected TransportInformationMapper transportInformationPublishMapper;
-	@Autowired
-	protected NoticeMapper noticeMapper;
 	
 	// 财务软件相关mapper
 	@Autowired

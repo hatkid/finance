@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.finance.entity.CompanyFinance;
 import com.finance.service.CompanyFinanceService;
-import com.finance.service.ForwarderLogisticsService;
 import com.finance.utils.StringUtil;
 
 @Transactional
@@ -20,7 +19,7 @@ public class CompanyFinanceServiceImpl extends
 		BaseServiceImpl<CompanyFinance> implements CompanyFinanceService {
 
 	private static final Logger LOGGER = LoggerFactory
-			.getLogger(ForwarderLogisticsService.class);
+			.getLogger(CompanyFinanceServiceImpl.class);
 
 	@Override
 	public boolean persistence(CompanyFinance l) {
