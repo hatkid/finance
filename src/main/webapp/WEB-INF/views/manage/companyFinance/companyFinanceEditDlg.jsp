@@ -108,7 +108,7 @@ table,th,td {
 						<th>供应商名称</th>
 						<td><input name='companyName' id='companyName' data-options="validType:'length[1,100]'"
 							required='required' class='easyui-textbox easyui-validatebox'
-							type='text' style="width:145px;"/>
+							type='text'/>
 						</td>
 					</tr>
 					<tr>

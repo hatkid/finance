@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<script type="text/javascript" src="resources/js/easyuiextendvalidate.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#form").form({
@@ -129,44 +130,44 @@ table,th,td {
 					</tr>
 					<tr>
 						<th>件数/套数</th>
-						<td><input name='setCount' id='setCount' required='required' data-options="min:0,precision:0"
-							class='easyui-numberbox' type='number' />
+						<td><input name='setCount' id='setCount' data-options="validType:'isDigitsOrEmpty'"
+							class='easyui-textbox easyui-validatebox' type='text' />
 						</td>
 					</tr>
 					<tr>
 						<th>发货件数</th>
-						<td><input name='saleCount' id='saleCount' required='required' data-options="min:0,precision:0"
-							class='easyui-numberbox' type='number' />
+						<td><input name='saleCount' id='saleCount' data-options="validType:'isDigitsOrEmpty'"
+							class='easyui-textbox easyui-validatebox' type='text'/>
 						</td>
 					</tr>
 					<tr>
 						<th>合计数量</th>
-						<td><input name='totalCount' id='totalCount' required='required' data-options="min:0,precision:0"
-							class='easyui-numberbox' type='number' />
+						<td><input name='totalCount' id='totalCount' data-options="validType:'isDigitsOrEmpty'"
+							class='easyui-textbox easyui-validatebox' type='text'/>
 						</td>
 					</tr>
 					<tr>
 						<th>单价</th>
-						<td><input name='price' id='price' required='required' data-options="min:0,precision:2"
-							class='easyui-numberbox' type='number' />
+						<td><input name='price' id='price'  data-options="validType:'isMyNumber'"
+							class='easyui-textbox easyui-validatebox' type='text' />
 						</td>
 					</tr>
 					<tr>
 						<th>合计金额</th>
-						<td><input name='totalPrice' id='totalPrice' required='required' data-options="min:0,precision:2"
-							class='easyui-numberbox' type='number' />
+						<td><input name='totalPrice' id='totalPrice' data-options="validType:'isMyNumber'"
+							class='easyui-textbox easyui-validatebox' type='text' />
 						</td>
 					</tr>
 					<tr>
 						<th>小计</th>
 						<td><input name='subtotal' id='subtotal' type="text"
-							required='required' class="easyui-textbox easyui-validatebox" />
+							class="easyui-textbox easyui-validatebox" />
 						</td>
 					</tr>
 					<tr>
 						<th>备注</th>
 						<td><input name='remark' id='remark' type="text"
-							required='required' class="easyui-textbox easyui-validatebox" />
+							class="easyui-textbox easyui-validatebox" />
 						</td>
 					</tr>
 				</table>

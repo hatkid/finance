@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<script type="text/javascript" src="resources/js/easyuiextendvalidate.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#form").form({
@@ -136,37 +137,37 @@ table,th,td {
 					<tr>
 						<th>摘要</th>
 						<td><input name='abstractContent' id='abstractContent' type="text"
-							required='required' class="easyui-textbox easyui-validatebox"  />
+							class="easyui-textbox easyui-validatebox"  />
 						</td>
 					</tr>
 					<tr>
 						<th>入账(借)</th>
-						<td><input name='entrys' id='entrys' required='required' data-options="min:0,precision:2"
-							class='easyui-numberbox' type='number' />
+						<td><input name='entrys' id='entrys' data-options="validType:'isMyNumber'"
+							class='easyui-textbox easyui-validatebox' type='text' />
 						</td>
 					</tr>
 					<tr>
 						<th>出账(贷)</th>
-						<td><input name='outs' id='outs' required='required' data-options="min:0,precision:2"
-							class='easyui-numberbox' type='number' />
+						<td><input name='outs' id='outs' data-options="validType:'isMyNumber'"
+							class='easyui-textbox easyui-validatebox' type='text' />
 						</td>
 					</tr>
 					<tr>
 						<th>支付方式</th>
 						<td><input name='payment' id='payment' type="text"
-							required='required' class="easyui-textbox easyui-validatebox"  />
+							class="easyui-textbox easyui-validatebox"  />
 						</td>
 					</tr>
 					<tr>
 						<th>收款人</th>
 						<td><input name='payee' id='payee' type="text"
-							required='required' class="easyui-textbox easyui-validatebox" />
+							class="easyui-textbox easyui-validatebox" />
 						</td>
 					</tr>
 					<tr>
 						<th>备注</th>
 						<td><input name='remark' id='remark' type="text"
-							required='required' class="easyui-textbox easyui-validatebox" />
+						 class="easyui-textbox easyui-validatebox" />
 						</td>
 					</tr>
 				</table>
