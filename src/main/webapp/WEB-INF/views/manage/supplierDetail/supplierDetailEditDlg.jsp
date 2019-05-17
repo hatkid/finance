@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<script type="text/javascript" src="resources/js/easyuiextendvalidate.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#form").form({
@@ -112,7 +113,7 @@ table,th,td {
 					<tr>
 						<th>供应商名称</th>
 						<td>
-							<input class="easyui-combobox" name="companyId" id="companyId" editable=false
+							<input class="easyui-combobox" name="companyId" id="companyId" required='required' editable=false
 								data-options="
 									url: 'manage/supplierDetail/getCompanyName',
 									valueField:'id',
@@ -129,37 +130,37 @@ table,th,td {
 					<tr>
 						<th>单位</th>
 						<td><input name='unit' id='unit' type="text"
-							required='required' class="easyui-textbox easyui-validatebox" />
+							 class="easyui-textbox easyui-validatebox" />
 						</td>
 					</tr>
 					<tr>
 						<th>数量</th>
-						<td><input name='amount' id='amount' required='required' data-options="min:0,precision:0"
-							class='easyui-numberbox' type='number' />
+						<td><input name='amount' id='amount' type="text" data-options="validType:'isMyNumber'"
+							class='easyui-textbox easyui-validatebox'  />
 						</td>
 					</tr>
 					<tr>
 						<th>单价</th>
-						<td><input name='price' id='price' required='required' data-options="min:0,precision:2"
-							class='easyui-numberbox' type='number' />
+						<td><input name='price' id='price' type="text" data-options="validType:'isMyNumber'"
+							class='easyui-textbox easyui-validatebox'/>
 						</td>
 					</tr>
 					<tr>
 						<th>金额</th>
-						<td><input name='total' id='total' required='required' data-options="min:0,precision:2"
-							class='easyui-numberbox' type='number' />
+						<td><input name='total' id='total' data-options="validType:'isMyNumber'"
+							class='easyui-textbox easyui-validatebox' type='text' />
 						</td>
 					</tr>
 					<tr>
 						<th>已付款</th>
-						<td><input name='paid' id='paid' required='required' data-options="min:0,precision:2"
-							class='easyui-numberbox' type='number' />
+						<td><input name='paid' id='paid' data-options="validType:'isMyNumber'"
+							class='easyui-textbox easyui-validatebox' type='text' />
 						</td>
 					</tr>
 					<tr>
 						<th>付款方式</th>
 						<td><input name='payment' id='payment' type="text"
-							required='required' class="easyui-textbox easyui-validatebox" />
+							class="easyui-textbox easyui-validatebox" />
 						</td>
 					</tr>
 				</table>
